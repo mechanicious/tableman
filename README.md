@@ -14,6 +14,7 @@ Tableman allows you to convert one of the *Tableman Supported Data-Types* into a
 * HTML Bootstrap 3 Table
 
 ## Example
+    php
     $data = array(
         array(
             'id'    => 1,
