@@ -8,8 +8,10 @@ Tableman allows you to convert one of the *Tableman Supported Data-Types* into a
 
 **Tableman Supported Data-Types**
 * Array
+* JSON
 
 **Tableman Supported Conversion Types**
+* JSON
 * HTML
 * HTML Bootstrap 3 Table
 
