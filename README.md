@@ -14,4 +14,23 @@ Tableman allows you to convert one of the *Tableman Supported Data-Types* into a
 * HTML Bootstrap 3 Table
 
 ## Example
-    asasd
+    $data = array(
+        array(
+            'id'    => 1,
+            'name'  => 'Joe',
+            'age'   => 25
+        ),
+        array(
+            'id'    => 2,
+            'name'  => 'Tony',
+            'age'   => 27
+        ),
+    );
+    
+    $tableman  = new Tableman($data);
+    $tableman->getHtml(); // (string) HTML markup for the table
+    // More fun
+    $tableman->forEveryRow(function(&$row) {
+        if(is_int($row)) $row *= $row; // square it!
+    })
+    ->getHtml();
