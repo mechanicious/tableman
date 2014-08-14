@@ -31,7 +31,7 @@ Tableman allows you to convert one of the *Tableman Supported Data-Types* into a
     $tableman->getHtml(); // (string) HTML markup for the table
     
     // More fun
-    $tableman->forEveryRow(function(&$row) {
+    $tableman->forEveryRow(function($row) {
         if(is_int($row)) $row *= $row; // square it!
     })
     ->getHtml();
