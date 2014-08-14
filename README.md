@@ -11,6 +11,7 @@ Tableman allows you to convert one of the *Tableman Supported Data-Types* into a
 * JSON
 
 **Tableman Supported Conversion Types**
+* Array
 * JSON
 * HTML
 * HTML Bootstrap 3 Table
