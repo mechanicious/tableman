@@ -107,4 +107,31 @@ class Tests extends \PHPUnit_Framework_TestCase
 			}'
 		));
 	}
+
+	public function testEachRow()
+	{
+		$columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
+		$tableman = new \mechanicious\Tableman\Tableman($columnBag);
+		$tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
+			// If you actually want to make changes then make sure
+			// you **reference** items!
+			dd($ref->all());
+			foreach($row as $columnHeader => &$cell)
+			{
+				// Append an ellipsis at the very end of everything.
+				$cell .= "...";
+			}
+		});
+
+		$this->assertEquals($this->cleanWhiteSpace($tableman->toJSON()), 
+			$this->cleanWhiteSpace('
+			{
+				"id":["1...","2..."],
+				"name":["Joe...","Tony..."],
+				"age":["25...", "27..."],
+				"hobby":["...","sport..."]
+			}'
+		));
+
+	}
 }
