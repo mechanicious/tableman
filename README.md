@@ -62,7 +62,7 @@ $tableman  = new Tableman($data);
 $tableman->getHtml(); // (string) HTML markup for the table
 
 // Custom filters
-$tableman->each(function(&$rowIndex, $&row) {
+$tableman->each(function(&$rowIndex, &$row) {
     if(is_int($row)) $row *= $row; // square it!
 })
 ->getHtml();
