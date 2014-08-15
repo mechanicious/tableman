@@ -625,8 +625,7 @@ class Collection implements ArrayAccess, ArrayableInterface, Countable, Iterator
 	 */
 	public function toArray()
 	{
-		if(gettype($this->items) !== "array") dd($this->items);
-			return array_map(function($value)
+		return array_map(function($value)
 		{
 			return $value instanceof ArrayableInterface ? $value->toArray() : $value;
 		}, $this->items);
