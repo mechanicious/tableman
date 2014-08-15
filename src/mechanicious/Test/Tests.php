@@ -97,7 +97,7 @@ class Tests extends \PHPUnit_Framework_TestCase
 	{
 		$columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
 		$tableman = new \mechanicious\Tableman\Tableman($columnBag);
-		$this->assertEquals($this->cleanWhiteSpace($tableman->toJSON()), 
+		$this->assertEquals($this->cleanWhiteSpace($tableman->getJson()), 
 			$this->cleanWhiteSpace('
 			{
 				"id":[1,2],
@@ -115,15 +115,14 @@ class Tests extends \PHPUnit_Framework_TestCase
 		$tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
 			// If you actually want to make changes then make sure
 			// you **reference** items!
-			dd($ref->all());
 			foreach($row as $columnHeader => &$cell)
 			{
-				// Append an ellipsis at the very end of everything.
+				// Append an ellipsis at the very end of every cell.
 				$cell .= "...";
 			}
 		});
 
-		$this->assertEquals($this->cleanWhiteSpace($tableman->toJSON()), 
+		$this->assertEquals($this->cleanWhiteSpace($tableman->getJSON()), 
 			$this->cleanWhiteSpace('
 			{
 				"id":["1...","2..."],

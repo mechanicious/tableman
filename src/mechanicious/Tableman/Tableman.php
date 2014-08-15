@@ -17,11 +17,20 @@ class Tableman extends Collection
 
 	/**
 	 * 	Get JSON representation of the data
-	 * @return [type]
+	 * @return string
 	 */
-	public function getJSON()
+	public function getJSON($format = 'column')
 	{
-		return with(new static(new ColumnBag($this->items)))->toJSON();
+    switch ($format) {
+      case 'column':
+        return $json = $this->toJson();
+      break;
+
+      default:
+        $collection = new Collection($this->getRows());
+        return $json = $collection->toJson();
+      break;
+    }
 	}
 	
 
