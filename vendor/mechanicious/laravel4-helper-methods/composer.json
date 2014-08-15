@@ -1,0 +1,15 @@
+{
+    "name": "mechanicious/laravel4-helper-methods",
+    "description": "Helper methods from Laravel 4 Framework",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+
+    },
+    "autoload":
+    {
+    	"files": [
+    	"src/mechanicious/Illuminate/Support/helpers.php"
+    	]
+    }
+}

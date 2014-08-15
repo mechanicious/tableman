@@ -1,0 +1,12 @@
+{
+    "name": "mechanicious/laravel4-collection",
+    "description": "Collecion class from the Laravel 4 Framework",
+    "license": "MIT",
+    "minimum-stability": "dev",
+    "require": {
+
+    },
+    "autoload": {
+        "psr-4": {"Illuminate\\": "./"}
+    }
+}
