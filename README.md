@@ -24,14 +24,11 @@ These are things you might want to exclude from your package if you already have
 * Sort columns
 * Sort rows
 * Translate foreign key of your table into human-friendly data
-* Add a column actions with links that'll map to your update or delete routes
+* Add a column "actions" with links that'll map to your update or delete route
 * Split a table into several pieces you could distribute over the page
 * Display different tables using same template
 * and all other sorts of data manipulation!
 
-## Tableman usage
-
-What I like to do is to create Tableman in the controller and pass it to the view for optional further processing. Different route-methods in the controller may pass different tables to same template.
 
 ## Conversion
 Tableman allows you to convert one of the *Tableman Supported Data-Types* into a *Tableman Supported Conversion Type*. After you make the conversion you can then again re-convert the table to the data-type you've started with.
@@ -71,7 +68,7 @@ $tableman->forEveryRow(function($row) {
 ->getHtml();
 ```
 
-### API (human friendly)
+### Tableman API (human friendly)
 You'll find a bit of explanation about the methods underneath.
 
 #### mechanicious\Tableman::eachRow($callback)
