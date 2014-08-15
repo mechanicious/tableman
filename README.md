@@ -6,9 +6,11 @@ Tables are a great way to represent data. Almost every type of data can be repre
 
 ## What's included
 These are things you might want to exclude from your package if you already have them.
+> Note: For foreign libraries default mappings are used so for example Laravel 4 Collection would be mapped to Illuminate\Support\Collection
 
-* Laravel 4 Collection API
+* Laravel 4 Collection
 * Laravel 4 helper methods
+* Tests
 
 ## Tableman usecases 
 * Apply filters based on cell's content
