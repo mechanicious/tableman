@@ -9,7 +9,6 @@ These are things you might want to exclude from your package if you already have
 
 * Laravel 4 Collection API
 * Laravel 4 helper methods
-* Tests
 
 ## Tableman usecases 
 * Apply filters based on cell's content
