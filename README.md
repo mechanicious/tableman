@@ -62,13 +62,13 @@ $tableman  = new Tableman($data);
 $tableman->getHtml(); // (string) HTML markup for the table
 
 // Custom filters
-$tableman->forEveryRow(function($row) {
+$tableman->each(function(&$rowIndex, $&row) {
     if(is_int($row)) $row *= $row; // square it!
 })
 ->getHtml();
 ```
 
-### Tableman API (human friendly)
+## Tableman API (human friendly)
 You'll find a bit of explanation about the methods underneath.
 
 #### mechanicious\Tableman::eachRow($callback)
@@ -100,8 +100,9 @@ Allows you to loop through the rows filter things out and apply changes.
 			}
 		});
 
-		// To JSON
-		$tableman->toJSON();
+		// To JSON 
+		// Two formats are available column-format, and row-format. Row-format is the one you get from a DB-Query.
+		$tableman->toJSON($format = "column");
 		//{
 		//	"id":["1...","2..."],
 		//	"name":["Joe...","Tony..."],
