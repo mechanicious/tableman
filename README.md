@@ -119,7 +119,7 @@ $callback = function(&$hook, &$row, &$rowIndex) {};
 ```
 
 **$hook (mechanicious\Tableman\Tableman)**
-Reference to the main object. Note: all Illuminate\Support\Collection API is in the reach of your hand. Thanks to the ` $hook` you don't need to refer to an external variable.
+Reference to the main object. Note: all Illuminate\Support\Collection API is in the reach of your hand. Thanks to the `$hook` you don't need to refer to an external variable.
 ```php
 $hook->all();
 ```
