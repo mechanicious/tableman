@@ -75,40 +75,40 @@ You'll find a bit of explanation about the methods underneath.
 Allows you to loop through the rows filter things out and apply changes.
 
 ```php
-		$columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
-	   	array(
-	   	    'id'    => 1,
-	   	    'name'  => 'Joe',
-	   	    'age'   => 25
-	   	),
-	   	array(
-	   	    'id'    => 2,
-	   	    'name'  => 'Tony',
-	   	    'age'   => 27,
-	   	    'hobby' => 'sport',
-	   	))))
-	   	->columnize();
-		
-		$tableman = new \mechanicious\Tableman\Tableman($columnBag);
-		$tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
-			// If you actually want to make changes then make sure
-			// you **reference** items!
-			foreach($row as $columnHeader => &$cell)
-			{
-				// Append an ellipsis at the very end of every cell.
-				$cell .= "...";
-			}
-		});
+$columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
+   array(
+       'id'    => 1,
+       'name'  => 'Joe',
+       'age'   => 25
+   ),
+   array(
+       'id'    => 2,
+       'name'  => 'Tony',
+       'age'   => 27,
+       'hobby' => 'sport',
+   ))))
+   ->columnize();
 
-		// To JSON 
-		// Two formats are available column-format, and row-format. Row-format is the one you get from a DB-Query.
-		$tableman->toJSON($format = "column");
-		//{
-		//	"id":["1...","2..."],
-		//	"name":["Joe...","Tony..."],
-		//	"age":["25...", "27..."],
-		//	"hobby":["...","sport..."]
-		//}
+$tableman = new \mechanicious\Tableman\Tableman($columnBag);
+$tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
+	// If you actually want to make changes then make sure
+	// you **reference** items!
+	foreach($row as $columnHeader => &$cell)
+	{
+		// Append an ellipsis at the very end of every cell.
+		$cell .= "...";
+	}
+});
+
+// To JSON 
+// Two formats are available column-format, and row-format. Row-format is the one you get from a DB-Query.
+$tableman->toJSON($format = "column");
+//{
+//	"id":["1...","2..."],
+//	"name":["Joe...","Tony..."],
+//	"age":["25...", "27..."],
+//	"hobby":["...","sport..."]
+//}
 
 ```
 
