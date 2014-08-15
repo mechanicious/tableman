@@ -74,20 +74,58 @@ $tableman->forEveryRow(function($row) {
 You'll find a bit of explanation about the methods underneath.
 
 #### mechanicious\Tableman::eachRow($callback)
+Allows you to loop through the rows filter things out and apply changes.
+
+```php
+		$columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
+	   	array(
+	   	    'id'    => 1,
+	   	    'name'  => 'Joe',
+	   	    'age'   => 25
+	   	),
+	   	array(
+	   	    'id'    => 2,
+	   	    'name'  => 'Tony',
+	   	    'age'   => 27,
+	   	    'hobby' => 'sport',
+	   	))))
+	   	->columnize();
+		
+		$tableman = new \mechanicious\Tableman\Tableman($columnBag);
+		$tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
+			// If you actually want to make changes then make sure
+			// you **reference** items!
+			foreach($row as $columnHeader => &$cell)
+			{
+				// Append an ellipsis at the very end of every cell.
+				$cell .= "...";
+			}
+		});
+
+		// To JSON
+		$tableman->toJSON();
+		//{
+		//	"id":["1...","2..."],
+		//	"name":["Joe...","Tony..."],
+		//	"age":["25...", "27..."],
+		//	"hobby":["...","sport..."]
+		//}
+
+```
 
 **$callback (closure)**
 ```php
 $callback = function(&$hook, &$row, &$rowIndex) {};
 ```
 
-$hook (mechanicious\Tableman\Tableman)
+**$hook (mechanicious\Tableman\Tableman)**
 
 Reference to the main object. Note: all Illuminate\Support\Collection API is in the reach of your hand. Thanks to the ``` $hook``` you don't need to refer to an external variable.
 ```php
 $hook->all();
 ```
 
-$row (array)
+**$row (array)**
 
 Array with cells, each cell carries a column-header(key) of the column to which it belongs and cell-data(value)
 ```php
@@ -95,7 +133,7 @@ Array with cells, each cell carries a column-header(key) of the column to which 
 array('id' => 1, 'name' => 'Tony', 'age' => 27);
 ```
 
-$rowIndex (int)
+**$rowIndex (int)**
 
 Row number.
 ```php
