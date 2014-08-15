@@ -1,3 +1,5 @@
+## We're currently in alpha stage. Come back later or help work on awesum features now.
+
 ## Tableman
 
 Tables are a great way to represent data. Almost every type of data can be represented as a table. However not every table can represent every type of data. Tableman was created to totally unleash the potential of tables. The powefull API makes it possible for Tableman to easily fit every type of data.
