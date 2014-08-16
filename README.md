@@ -6,8 +6,9 @@ Tables are a great way to represent data. Almost every type of data can be repre
 
 ## What's included
 These are things you might want to exclude from your package if you already have them.
+> Note: For foreign libraries default mappings are used so for example Laravel 4 Collection would be mapped to Illuminate\Support\Collection
 
-* Laravel 4 Collection API
+* Laravel 4 Collection
 * Laravel 4 helper methods
 * Tests
 
@@ -23,14 +24,11 @@ These are things you might want to exclude from your package if you already have
 * Sort columns
 * Sort rows
 * Translate foreign key of your table into human-friendly data
-* Add a column actions with links that'll map to your update or delete routes
+* Add a column "actions" with links that'll map to your update or delete route
 * Split a table into several pieces you could distribute over the page
 * Display different tables using same template
 * and all other sorts of data manipulation!
 
-## Tableman usage
-
-What I like to do is to create Tableman in the controller and pass it to the view for optional further processing. Different route-methods in the controller may pass different tables to same template.
 
 ## Conversion
 Tableman allows you to convert one of the *Tableman Supported Data-Types* into a *Tableman Supported Conversion Type*. After you make the conversion you can then again re-convert the table to the data-type you've started with.
@@ -64,52 +62,53 @@ $tableman  = new Tableman($data);
 $tableman->getHtml(); // (string) HTML markup for the table
 
 // Custom filters
-$tableman->forEveryRow(function($row) {
-    if(is_int($row)) $row *= $row; // square it!
+$tableman->eachRow(function(&$rowIndex, &$row) {
+    if($row['id'] === 1) unset($row); // remove user with id eq to 1 from the table!
 })
 ->getHtml();
 ```
 
-### API (human friendly)
+## Tableman API (human friendly)
 You'll find a bit of explanation about the methods underneath.
 
 #### mechanicious\Tableman::eachRow($callback)
 Allows you to loop through the rows filter things out and apply changes.
 
 ```php
-		$columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
-	   	array(
-	   	    'id'    => 1,
-	   	    'name'  => 'Joe',
-	   	    'age'   => 25
-	   	),
-	   	array(
-	   	    'id'    => 2,
-	   	    'name'  => 'Tony',
-	   	    'age'   => 27,
-	   	    'hobby' => 'sport',
-	   	))))
-	   	->columnize();
-		
-		$tableman = new \mechanicious\Tableman\Tableman($columnBag);
-		$tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
-			// If you actually want to make changes then make sure
-			// you **reference** items!
-			foreach($row as $columnHeader => &$cell)
-			{
-				// Append an ellipsis at the very end of every cell.
-				$cell .= "...";
-			}
-		});
+$columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
+   array(
+       'id'    => 1,
+       'name'  => 'Joe',
+       'age'   => 25
+   ),
+   array(
+       'id'    => 2,
+       'name'  => 'Tony',
+       'age'   => 27,
+       'hobby' => 'sport',
+   ))))
+   ->columnize();
 
-		// To JSON
-		$tableman->toJSON();
-		//{
-		//	"id":["1...","2..."],
-		//	"name":["Joe...","Tony..."],
-		//	"age":["25...", "27..."],
-		//	"hobby":["...","sport..."]
-		//}
+$tableman = new \mechanicious\Tableman\Tableman($columnBag);
+$tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
+	// If you actually want to make changes then make sure
+	// you **reference** items!
+	foreach($row as $columnHeader => &$cell)
+	{
+		// Append an ellipsis at the very end of every cell.
+		$cell .= "...";
+	}
+});
+
+// To JSON 
+// Two formats are available column-format, and row-format. Row-format is the one you get from a DB-Query.
+$tableman->toJSON($format = "column");
+//{
+//	"id":["1...","2..."],
+//	"name":["Joe...","Tony..."],
+//	"age":["25...", "27..."],
+//	"hobby":["...","sport..."]
+//}
 
 ```
 
