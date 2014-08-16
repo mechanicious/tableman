@@ -62,8 +62,8 @@ $tableman  = new Tableman($data);
 $tableman->getHtml(); // (string) HTML markup for the table
 
 // Custom filters
-$tableman->each(function(&$rowIndex, &$row) {
-    if(is_int($row)) $row *= $row; // square it!
+$tableman->eachRow(function(&$rowIndex, &$row) {
+    if($row['id'] === 1) unset($row); // remove user with id eq to 1 from the table!
 })
 ->getHtml();
 ```
