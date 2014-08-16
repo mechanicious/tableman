@@ -25,10 +25,12 @@ class Columnizer
    */
   public function columnize()
   {
+    if($this->items instanceof ColumnBag) return $this->items;
+
     $columnized = $this->columnizeItems();
     $assemble   = array();
     array_walk($columnized, function($column, $columnName) use(&$assemble) {
-      $assemble[$columnName] = new Column($column);
+      $assemble[$columnName] = new Column($column, $columnName);
     });
     return new ColumnBag($assemble);
   }

@@ -3,7 +3,9 @@
 require_once __dir__ . '/../../../vendor/autoload.php';
 
 /**
- *  Little testing I run for myself. Best way to use this tests is to make
+ *  Little testing I run for myself, that isn't necessary 
+ * a part of the public API.
+ * Best way to run this tests is to use
  * separate files with everything set to public.
  */
 
@@ -26,6 +28,16 @@ class Other extends \PHPUnit_Framework_TestCase
             'hobby' => 'sport',
         ),
     );
+
+  /**
+   *  Useful with formatted string comparison  
+   * @param   string $string
+   * @return  string
+   */
+  public function cleanWhiteSpace($string, $replace = "")
+  {
+    return str_replace(array("\n", "\r", "\t", " "), $replace, $string);
+  }
 
   /**
    *  This method is not in the Columnizer's public API. If you wanna test it
@@ -75,5 +87,27 @@ class Other extends \PHPUnit_Framework_TestCase
             'hobby' => 'sport',
         )
     ));
+  }
+
+  public function testTablemanRenameColumns()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $headers = array(
+      'id'    => 'identification',
+      'name'  => 'firstname',
+      'age'   => 'level',
+      'hobby' => 'likes',
+      );
+
+    $tableman->renameHeaders($headers);
+    $this->assertEquals($this->cleanWhiteSpace($tableman->toJson()), $this->cleanWhiteSpace('
+        {
+          "identification":[1,2],
+          "firstname":["Joe","Tony"],
+          "level":[25,27],
+          "likes":[null,"sport"]
+        }
+      '));
   }
 }

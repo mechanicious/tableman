@@ -120,8 +120,11 @@ class Tests extends \PHPUnit_Framework_TestCase
         // Append an ellipsis at the very end of every cell.
         $cell .= "...";
       }
+
+      $ref->referenceTest = 'ok';
     });
 
+    // Test if the data changes get preserved.
     $this->assertEquals($this->cleanWhiteSpace($tableman->getJSON()), 
       $this->cleanWhiteSpace('
       {
@@ -132,5 +135,23 @@ class Tests extends \PHPUnit_Framework_TestCase
       }'
     ));
 
+    // Test if the main object get's affected. Wether the reference points to the right object.
+    $this->assertEquals($tableman->referenceTest, 'ok');
+  }
+
+  public function testTablemanOrderColumns()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->orderColumns(array('hobby', 'age', 'id', 'name'));
+    $this->assertEquals($this->cleanWhiteSpace($tableman->getJSON()), 
+      $this->cleanWhiteSpace('
+      {
+        "hobby":[null,"sport"],
+        "age":[25, 27],
+        "id":[1,2],
+        "name":["Joe","Tony"]
+      }'
+    ));
   }
 }
