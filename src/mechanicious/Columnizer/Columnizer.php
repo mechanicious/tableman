@@ -21,11 +21,14 @@ class Columnizer
 
   /**
    *  Go from rows to columns
+   * 
    * @return  mechanicious\Columnizer\ColumnBag
    */
   public function columnize()
   {
     if($this->items instanceof ColumnBag) return $this->items;
+    // Somtimes the data has already a columnized structure, then you
+    // just want to wrap it in the bag.
 
     $columnized = $this->columnizeItems();
     $assemble   = array();
@@ -60,7 +63,8 @@ class Columnizer
   }
 
   /**
-   *  Go from rows to columns
+   *  Columnize data
+   * 
    * @return  array
    */
   protected function columnizeItems()
@@ -91,6 +95,7 @@ class Columnizer
     array_walk($items, function($item, $key) use($items, &$largest) {
       if(count($items[$key]) > count($largest)) $largest = $items[$key];
     });
+
     return $columns = array_keys($largest);
   }
 }

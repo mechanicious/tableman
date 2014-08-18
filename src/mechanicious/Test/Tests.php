@@ -120,15 +120,19 @@ class Tests extends \PHPUnit_Framework_TestCase
         // Append an ellipsis at the very end of every cell.
         $cell .= "...";
       }
+      if(in_array('id', $ref->getColumnHeaders()))
+      {
+        $ref->replaceColumn(new \mechanicious\Columnizer\Column(array(6,7), '#'), 'id');
+      }
 
       $ref->referenceTest = 'ok';
     });
-
+    
     // Test if the data changes get preserved.
-    $this->assertEquals($this->cleanWhiteSpace($tableman->getJSON()), 
+    $this->assertEquals($this->cleanWhiteSpace($tableman->getJson('column')), 
       $this->cleanWhiteSpace('
       {
-        "id":["1...","2..."],
+        "#":[6, 7],
         "name":["Joe...","Tony..."],
         "age":["25...", "27..."],
         "hobby":["...","sport..."]
@@ -153,5 +157,118 @@ class Tests extends \PHPUnit_Framework_TestCase
         "name":["Joe","Tony"]
       }'
     ));
+  }
+
+  public function testTablemanRenameColumns()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $headers = array(
+      'id'    => 'identification',
+      'name'  => 'firstname',
+      'age'   => 'level',
+      'hobby' => 'likes',
+      );
+
+    $tableman->renameColumns($headers);
+    $this->assertEquals($this->cleanWhiteSpace($tableman->toJson()), $this->cleanWhiteSpace('
+        {
+          "identification":[1,2],
+          "firstname":["Joe","Tony"],
+          "level":[25,27],
+          "likes":[null,"sport"]
+        }
+      '));
+  }
+
+  public function testTablemanRenameColumnsEachRowCompatibility()
+  {
+    // We'll try to rename columns while looping through the items.
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
+      // If you actually want to make changes then make sure
+      // you **reference** items!
+      foreach($row as $columnHeader => &$cell)
+      {
+        // Append an ellipsis at the very end of every cell.
+        $cell .= "...";
+      }
+
+      // Renaming columns while still in the loop
+      if(isset($ref['id'])) // should be true on the first iteration only 
+      {
+        $ref->renameColumns(array(
+        'id'    => 'identification',
+        'name'  => 'firstname',
+        'age'   => 'level',
+        'hobby' => 'likes',
+      ));
+      }
+
+      if(in_array('id', $ref->getColumnHeaders()))
+      {
+        $ref->replaceColumn(new \mechanicious\Columnizer\Column(array(6,7), '#'), 'identification');
+      }
+    });
+
+    $keyHeaders = $tableman->getColumnHeaders();
+    $columnHeaders = array_map(function($column) {
+      return $column->getHeader();
+    }, $tableman->getColumns());
+
+    $this->assertEquals($keyHeaders, array_values($columnHeaders));
+  }
+
+  public function testEachColumn()
+  {
+    // We'll try to rename columns while looping through the items and at the
+    // same time we'll try to replace columns.
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->eachColumn(function(&$ref, &$column, $header) {
+      // If you actually want to make changes then make sure
+      // you **reference** items!
+      
+      // Replace the id column
+      if($header === 'id')
+      {
+        $column = new \mechanicious\Columnizer\Column(array(3,4), 'id');
+      }
+
+      // Renaming columns while still in the loop
+      if(isset($ref['id'])) // should be true on the first iteration only 
+      {
+        $ref->renameColumns(array(
+        'id'    => 'identification',
+        'name'  => 'firstname',
+        'age'   => 'level',
+        'hobby' => 'likes',
+      ));
+      }
+
+      // Again replace the column, note that the column has different name than the
+      // name of the column we're replacing, thus the name changes as well.
+      if(in_array('identification', $ref->getColumnHeaders()))
+      {
+        $ref->replaceColumn(new \mechanicious\Columnizer\Column(array(6,7), '#'), 'identification');
+      }
+    });
+
+    $keyHeaders = $tableman->getColumnHeaders();
+    $columnHeaders = array_map(function($column) {
+      return $column->getHeader();
+    }, $tableman->getColumns());
+
+    $this->assertEquals($keyHeaders, array_values($columnHeaders));
+
+    $this->assertEquals($this->cleanWhiteSpace($tableman->toJson()), $this->cleanWhiteSpace('
+        {
+          "#":[6,7],
+          "firstname":["Joe","Tony"],
+          "level":[25,27],
+          "likes":[null,"sport"]
+        }
+      '));
   }
 }

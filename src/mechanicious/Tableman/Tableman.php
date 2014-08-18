@@ -46,6 +46,17 @@ class Tableman extends Collection
   }
 
   /**
+   * Returns whatever the callback function returns
+   *  
+   * @param  closure $callback
+   * @return mixed
+   */
+  public function withdraw(\closure $callback)
+  {
+    return $callback($this);
+  }
+
+  /**
    * Sort columns with a callback function
    * @param  closure $callback
    * @return mechanicious\Tableman\Tableman;
@@ -53,6 +64,17 @@ class Tableman extends Collection
   public function sortColumns(\closure $callback)
   {
     $this->sort($callback);
+    return $this;
+  }
+
+  /**
+   * Reverse the order of columns
+   *  
+   * @return mechanicious\Tableman\Tableman;
+   */
+  public function reverseColumns()
+  {
+    $this->reverse();
     return $this;
   }
 
@@ -74,6 +96,16 @@ class Tableman extends Collection
         return ($prevOffset < $currentOffset) ? -1 : 1;
       });
     });
+  }
+
+  /**
+   * Get the columns
+   * 
+   * @return array
+   */
+  public function getColumns()
+  {
+    return $this->items;
   }
 
   /**
@@ -194,7 +226,7 @@ class Tableman extends Collection
    * @param  string $b
    * @return boolean
    */
-  public function compareColumns($colA, $colB)
+  public function compareColumnContent($colA, $colB)
   {
     return (bool) ($colA->toJson() === $colB->toJson());
   }
@@ -208,9 +240,14 @@ class Tableman extends Collection
    */
   public function replaceColumn(Column $col, $header)
   {
-    if( ! in_array($header, $this->items)) throw new Exception("column {$header} don't exist");
+    if( ! in_array($header, array_keys($this->items))) throw new \Exception("column {$header} don't exist in " . implode(', ', array_keys($this->items)));
     
     $this->items[$header] = $col;
+    if($header !== $col->getHeader())
+    {
+      $this->renameColumns(array($header => $col->getHeader()));
+    } 
+      
     return $this;
   }
 
@@ -222,11 +259,10 @@ class Tableman extends Collection
    */
   public function eachRowOf(\closure $callback, $header)
   {
-    $rows = $this->items[$header]->getRows();
-    array_walk($rows, function(&$row, &$rowIndex) use(&$rows, $callback) {
+    array_walk($this->items[$header]->items, function(&$row, $rowIndex) use($callback)
+    {
       $callback($this, $row, $rowIndex);
     });
-    $this->swapColumn($rows);
     return $this;
   }
 
@@ -238,11 +274,10 @@ class Tableman extends Collection
    */
   public function eachRow(\closure $callback) 
   {
-    $rows = $this->getRows();
-    array_walk($rows, function(&$row, &$rowIndex) use(&$rows, $callback) {
+    array_walk($this->getRows(), function(&$row, $rowIndex) use($callback)
+    {
       $callback($this, $row, $rowIndex);
     });
-    $this->swap($rows);
     return $this;
   }
 
@@ -254,14 +289,12 @@ class Tableman extends Collection
    */
   public function eachCell(closure $callback) 
   {
-     $rows = $this->getRows();
-    array_walk($rows, function(&$row, &$rowIndex) use(&$rows, $callback) {
+    array_walk($this->getRows(), function(&$row, &$rowIndex) use(&$rows, $callback) {
       foreach($row as $cellColumn => &$cell)
       {
         $callback($this, $cell, $cellColumn, $row, $rowIndex);
       }
     });
-    $this->swap($rows);
     return $this;
   }
 
@@ -271,29 +304,11 @@ class Tableman extends Collection
    * @param  closure $callback
    * @return mechanicious\Tableman\Tableman
    */
-  public function eachColumn(closure $callback) 
+  public function eachColumn(\closure $callback) 
   {
-    $columns = $this->items;
-    array_walk($columns, function(&$column, &$columnHeader) use($callback) {
-      $callback($this, $column, $columnHeader);
+    array_walk($this->items, function(&$column, &$columnHeader) use($callback, &$columns) {
+      $callback($this, $column, $columnHeader);      
     });
-    $this->swap($columns);
-    return $this;
-  }
-
-  /**
-   * Apply a callback to each column header
-   * 
-   * @param  closure $callback
-   * @return mechanicious\Tableman\Tableman
-   */
-  public function eachHeader(closure $callback) 
-  {
-    $columns = $this->items;
-    array_walk($columns, function(&$column, &$columnHeader) use($callback) {
-      $callback($this, $columnHeader);
-    });
-    $this->swap($columns);
     return $this;
   }
 
@@ -365,9 +380,6 @@ class Tableman extends Collection
    */
   public function getRows()
   {
-    $items  = &$this->items;
-    $mergee = array();
-    $columNames = array_keys($this->items);
     // A short explanation. 
     // For each column we'll loop though the rows.
     // If the row index doesn't exist in the mergee then we'll push the row
@@ -375,13 +387,17 @@ class Tableman extends Collection
     // is being assembled.
     // We could just loop through one of the columns, but we want to deal with
     // asymmetric arrays as well.
-    foreach($items as $columnName => &$column)
+    $items  = &$this->items;
+    $mergee = array();
+    $columnNames = array_keys($this->items);
+    for($i = 0; $i < count($this->first()); $i++)
     {
-      for($i = 0; $i < count($column); $i++)
+      $row = array();
+      foreach($items as $header => &$column)
       {
-        if( ! isset($mergee[$i]))
-          $mergee[] = $this->assembleRow($columNames, $i);
+        $row[$header] = &$column->items[$i];
       }
+      $mergee[] = $row;
     }
     return $mergee;
   }
@@ -413,17 +429,6 @@ class Tableman extends Collection
   }
 
   /**
-   * Replace the current set of items with new items
-   * 
-   * @param  array $items
-   * @return void
-   */
-  protected function swap($items)
-  {
-    $this->__construct(with(new Columnizer($items))->columnize());
-  }
-
-  /**
    * Unlike getColumn headers this function doesn't get the keys
    * of the current set, but the header of the columns obtained
    * with getHeader()
@@ -445,16 +450,28 @@ class Tableman extends Collection
   public function renameColumns(array $headers = array())
   {
     $items = $this->items;
-    array_walk($items, function($column, $header) use(&$headers) {
-      $oldKey = $header;
-      $newKey = $headers[$header];
+    // We'll need this to keep the order later on if user will decide
+    // to for example rename only one column instead of all. That's because
+    // we use put(), and put appends. (We're supposed to only rename the columns after all)
+    $headersCopy = $this->getColumnHeaders();
+    array_walk($headers, function($newKey, $oldKey) use(&$items, &$headersCopy) {
       // We don't want to change the key in items array only,
       // but we want to change the key of the column as well.
       // So we can simply replace the keys.
-      $column = new Column($column->all(), $newKey);
-      $this->put($newKey, $column);
-      $this->forget($oldKey);
+      
+      // If you would do this when headers are equal, then you
+      // would clean the array out of items because you would
+      // not create any new entries and still remove old ones.
+      if($newKey !== $oldKey)
+      {
+        $column = new Column($items[$oldKey]->all(), $newKey);
+        $this->put($newKey, $column);
+        $this->forget($oldKey);
+        $headersCopy[array_search($oldKey, $headersCopy)] = $newKey;
+      }
     });
+    // Order columns like they where before.
+    $this->orderColumns($headersCopy);
     return $this;
   }
 }
