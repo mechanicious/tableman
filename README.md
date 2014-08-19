@@ -74,6 +74,28 @@ You'll find a bit of explanation about the methods underneath.
 #### mechanicious\Tableman::eachRow($callback)
 Allows you to loop through the rows filter things out and apply changes.
 
+#####$callback (closure)
+```php
+$callback = function(&$hook, &$row, &$rowIndex) {};
+```
+* **$hook (mechanicious\Tableman\Tableman)**
+Reference to the main object. Note: `Illuminate\Support\Collection` API is in the reach of your hand. Thanks to the `$hook` variable you don't need an external variable outside the filter function.
+```php
+$hook->all();
+```
+* **$row (array)**
+Array with cells, each cell carries a column-header(key) of the column to which it belongs and cell-data(value)
+```php
+// Example
+array('id' => 1, 'name' => 'Tony', 'age' => 27);
+```
+* **$rowIndex (int)**
+Row number.
+```php
+if($rowIndex % 2 !== 0) unset($row);
+```
+
+#####Example mechanicious\Tableman::eachRow($callback)
 ```php
 $columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
    array(
@@ -112,26 +134,19 @@ $tableman->toJSON($format = "column");
 
 ```
 
-**$callback (closure)**
+#### mechanicious\Tableman::addColumn($col, $position = 3)
+Allows you to loop through the rows filter things out and apply changes.
+
+#####$col (mechanicious\Columnizer\Column)
+Column to add.
+
+#####$position (int)
+Offset to add the column at.
+
+
+#####Example mechanicious\Tableman::eachRow($callback)
 ```php
-$callback = function(&$hook, &$row, &$rowIndex) {};
+$tableman->addColumn(new Column($anyData = array(true, false, true), 'registered'), 3);
+
 ```
 
-**$hook (mechanicious\Tableman\Tableman)**
-Reference to the main object. Note: `Illuminate\Support\Collection` API is in the reach of your hand. Thanks to the `$hook` variable you don't need an external variable outside the filter function.
-```php
-$hook->all();
-```
-
-**$row (array)**
-Array with cells, each cell carries a column-header(key) of the column to which it belongs and cell-data(value)
-```php
-// Example
-array('id' => 1, 'name' => 'Tony', 'age' => 27);
-```
-
-**$rowIndex (int)**
-Row number.
-```php
-if($rowIndex % 2 !== 0) unset($row);
-```
