@@ -271,4 +271,37 @@ class Tests extends \PHPUnit_Framework_TestCase
         }
       '));
   }
+
+  public function testColumnAdd()
+  {
+    // We'll try here:
+    // 1. If data stays symmetric when adding an assymetric column (larger and smaller column in relation to the existent data)
+    // 2. If the column gets the right offset
+    // 3. If when adding an existing column the column gets replaced
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->addColumn(new \mechanicious\Columnizer\Column(array(true, false, true), 'registered'), 3);
+    $this->assertEquals($this->cleanWhiteSpace($tableman->getJson()), 
+      $this->cleanWhiteSpace('
+      {
+        "id":         [1, 2, null],
+        "name":       ["Joe","Tony", null],
+        "age":        [25, 27, null],
+        "registered": [true, false, true],
+        "hobby":      [null, "sport", null]
+      }'
+    ));
+
+    $tableman->addColumn(new \mechanicious\Columnizer\Column(array(true), 'registered'), 2);
+    $this->assertEquals($this->cleanWhiteSpace($tableman->getJson()), 
+      $this->cleanWhiteSpace('
+      {
+        "id":         [1, 2, null],
+        "name":       ["Joe","Tony", null],
+        "registered": [true, null, null],
+        "age":        [25, 27, null],
+        "hobby":      [null, "sport", null]
+      }'
+    ));
+  }
 }

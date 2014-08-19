@@ -132,7 +132,7 @@ class Tableman extends Collection
    *  
    * @return bool
    */
-  public function columnExists()
+  public function columnExists($header)
   {
     return in_array($header, $this->getColumnHeaders());
   }
@@ -157,8 +157,40 @@ class Tableman extends Collection
    */
   public function addColumn(Column $col, $offset)
   {
-    $this->splice($offset, 0, $col);
+    $header = $col->getHeader();
+    // If user is adding an already existing index, then
+    // we'll assume the client intends to replace the columns.
+    if($this->columnExists($header)) $this->forget($header);
+    // Create expected order
+    $columnOrder = $this->getColumnHeaders();
+    array_splice($columnOrder, $offset, 0, $header);
+    // Add column into the items
+    $this->items[$header] = $this->padData($col);
+    // Apply our order
+    $this->orderColumns($columnOrder);
     return $this;
+  }
+
+  /**
+   * Symmetrize data if the given column is asymmetric  
+   * 
+   * @param  mechanicious\Columnizer\Column $col
+   * @return mechanicious\Columnizer\Column
+   */
+  public function padData(Column $col, $padValue = null)
+  {
+    if( ( $colSize = count($col) ) > ( $dataSize = count($this->first()) ) )
+    {
+      $this->eachColumn(function(&$ref, &$column, $header) use($colSize, $padValue) {
+        $column->items = array_pad($column->all(), $colSize, $padValue);
+      });
+    }
+    else
+    {
+     $col->items = array_pad($col->all(), $dataSize, $padValue);
+    }
+    // Either way return the column back.
+    return $col;
   }
 
   /**
@@ -168,7 +200,7 @@ class Tableman extends Collection
    */
   public function prependColumn(Column $col)
   {
-    $this->prepend($col);
+    $this->prepend($this->padData($col));
     return $this;
   }
 
@@ -179,7 +211,7 @@ class Tableman extends Collection
    */
   public function appendColumn(Column $col)
   {
-    $this->push($col);
+    $this->push($this->padData($col));
     return $this;
   }
 
