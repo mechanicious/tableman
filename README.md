@@ -112,9 +112,9 @@ $columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
    ->columnize();
 
 $tableman = new \mechanicious\Tableman\Tableman($columnBag);
-$tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
+$tableman->eachRow(function(&$ref, &$row, $rowIndex) {
 	// If you actually want to make changes then make sure
-	// you **reference** items!
+	// you **reference** items.
 	foreach($row as $columnHeader => &$cell)
 	{
 		// Append an ellipsis at the very end of every cell.
@@ -124,7 +124,7 @@ $tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
 
 // To JSON 
 // Two formats are available column-format, and row-format. Row-format is the one you get from a DB-Query.
-$tableman->toJSON($format = "column");
+$tableman->toJson($format = "column");
 //{
 //	"id":["1...","2..."],
 //	"name":["Joe...","Tony..."],
