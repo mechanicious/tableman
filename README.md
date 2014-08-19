@@ -95,7 +95,7 @@ Row number.
 if($rowIndex % 2 !== 0) unset($row);
 ```
 
-#####Example mechanicious\Tableman::eachRow($callback)
+####Example mechanicious\Tableman::eachRow($callback)
 ```php
 $columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
    array(
@@ -144,7 +144,7 @@ Column to add.
 Offset to add the column at.
 
 
-#####Example mechanicious\Tableman::eachRow($callback)
+####Example mechanicious\Tableman::eachRow($callback)
 ```php
 $tableman->addColumn(new Column($anyData = array(true, false, true), 'registered'), 3);
 
