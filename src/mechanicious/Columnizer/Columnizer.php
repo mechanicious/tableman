@@ -39,17 +39,6 @@ class Columnizer
   }
 
   /**
-   * Line up duplicate haeader
-   *  
-   * @param  int $counter
-   * @return string
-   */
-  protected function safeHeader($counter)
-  {
-
-  }
-
-  /**
    *  Pre-fill missing collumns to line the rows up 
    * @return  void
    */
