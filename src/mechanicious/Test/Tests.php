@@ -304,4 +304,23 @@ class Tests extends \PHPUnit_Framework_TestCase
       }'
     ));
   }
+
+  public function testColumnChop()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnize();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->eachColumn(function(&$ref, &$column, $header) {
+      $column->chop(1);
+    });
+    
+    $this->assertEquals($this->cleanWhiteSpace($tableman->getJson()), 
+      $this->cleanWhiteSpace('
+      {
+        "id":         [1],
+        "name":       ["Joe"],
+        "age":        [25],
+        "hobby":      [null]
+      }'
+    ));
+  }
 }

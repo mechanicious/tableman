@@ -24,4 +24,18 @@ class Column extends Collection
   {
     return $this->header;
   }
+
+  /**
+   * Remove last elements of an array
+   *  
+   * @param  int $amount
+   * @return mechanicious\Columnizer\Column
+   */
+  public function chop($amount)
+  {
+    $endOffset = count($this->items) - $amount;
+    $slice = array_slice($this->items, 0, $endOffset, $preserveKeys = true);
+    $this->items = $slice;
+    return $this;
+  }
 }
