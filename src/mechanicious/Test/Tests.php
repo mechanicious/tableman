@@ -40,7 +40,7 @@ class Tests extends \PHPUnit_Framework_TestCase
   public function testColumnizerColumnizeWithoutData()
   {
     $columnizer = new \mechanicious\Columnizer\Columnizer();
-    $this->assertEquals(get_class($columnizer->columnizeArrayRows()), 'mechanicious\Columnizer\ColumnBag');
+    $this->assertEquals(get_class($columnizer->columnizeRowArray()), 'mechanicious\Columnizer\ColumnBag');
   }
 
   public function testArrayAccessColumnizerColumnizeWithData()
@@ -52,16 +52,16 @@ class Tests extends \PHPUnit_Framework_TestCase
     //    |--- Column (name)
     //    |--- Column (age)
     //    |--- Column (hobby)
-    $this->assertEquals(get_class($columnizer->columnizeArrayRows()), 'mechanicious\Columnizer\ColumnBag');
-    $this->assertEquals(get_class($columnizer->columnizeArrayRows()->get('name')), 'mechanicious\Columnizer\Column');
+    $this->assertEquals(get_class($columnizer->columnizeRowArray()), 'mechanicious\Columnizer\ColumnBag');
+    $this->assertEquals(get_class($columnizer->columnizeRowArray()->get('name')), 'mechanicious\Columnizer\Column');
 
     // ArrayAccess in action
-    $this->assertEquals($columnizer->columnizeArrayRows()['name'][1], 'Tony');
+    $this->assertEquals($columnizer->columnizeRowArray()['name'][1], 'Tony');
   }
 
   public function testGetBS3Table()
   {
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $this->assertEquals(
       // Unfortunately got a little messy!
@@ -95,7 +95,7 @@ class Tests extends \PHPUnit_Framework_TestCase
 
   public function testTablemanToJSON()
   {
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $this->assertEquals($this->cleanWhiteSpace($tableman->getJson()), 
       $this->cleanWhiteSpace('
@@ -110,7 +110,7 @@ class Tests extends \PHPUnit_Framework_TestCase
 
   public function testEachRow()
   {
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
       // If you actually want to make changes then make sure
@@ -145,7 +145,7 @@ class Tests extends \PHPUnit_Framework_TestCase
 
   public function testTablemanOrderColumns()
   {
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $tableman->orderColumns(array('hobby', 'age', 'id', 'name'));
     $this->assertEquals($this->cleanWhiteSpace($tableman->getJSON()), 
@@ -161,7 +161,7 @@ class Tests extends \PHPUnit_Framework_TestCase
 
   public function testTablemanRenameColumns()
   {
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $headers = array(
       'id'    => 'identification',
@@ -184,7 +184,7 @@ class Tests extends \PHPUnit_Framework_TestCase
   public function testTablemanRenameColumnsEachRowCompatibility()
   {
     // We'll try to rename columns while looping through the items.
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $tableman->eachRow(function(&$ref, &$row, &$rowIndex) {
       // If you actually want to make changes then make sure
@@ -224,7 +224,7 @@ class Tests extends \PHPUnit_Framework_TestCase
   {
     // We'll try to rename columns while looping through the items and at the
     // same time we'll try to replace columns.
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $tableman->eachColumn(function(&$ref, &$column, $header) {
       // If you actually want to make changes then make sure
@@ -278,7 +278,7 @@ class Tests extends \PHPUnit_Framework_TestCase
     // 1. If data stays symmetric when adding an assymetric column (larger and smaller column in relation to the existent data)
     // 2. If the column gets the right offset
     // 3. If when adding an existing column the column gets replaced
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $tableman->addColumn(new \mechanicious\Columnizer\Column(array(true, false, true), 'registered'), 3);
     $this->assertEquals($this->cleanWhiteSpace($tableman->getJson()), 
@@ -307,7 +307,7 @@ class Tests extends \PHPUnit_Framework_TestCase
 
   public function testColumnChop()
   {
-    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeArrayRows();
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
     $tableman->eachColumn(function(&$ref, &$column, $header) {
       $column->chop(1);

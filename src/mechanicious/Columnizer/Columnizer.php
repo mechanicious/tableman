@@ -24,7 +24,7 @@ class Columnizer
    * 
    * @return  mechanicious\Columnizer\ColumnBag
    */
-  public function columnizeArrayRows()
+  public function columnizeRowArray()
   {
     if($this->items instanceof ColumnBag) return $this->items;
     // Somtimes the data has already a columnized structure, then you
