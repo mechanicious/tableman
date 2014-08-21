@@ -150,3 +150,15 @@ $tableman->addColumn(new Column($anyData = array(true, false, true), 'registered
 
 ```
 
+#### mechanicious\Columnizer\Column::chop($amount)
+Remove a certain amount of items from the end of a column.
+
+#####amount (int)
+Offset to add the column at.
+
+####Example mechanicious\Columnizer\Column::chop($amount)
+```php
+$column->chop($amount = 3);
+
+```
+
