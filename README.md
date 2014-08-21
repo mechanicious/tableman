@@ -4,6 +4,9 @@
 
 Tables are a great way to represent data. Almost every type of data can be represented as a table. However not every table can represent every type of data. Tableman was created to totally unleash the potential of tables. The powefull API makes it possible for Tableman to easily fit every type of data and any type of need.
 
+## Tableman Technical Details
+Tableman exists out of four main modules, wich are: Tableman, Columnizer, Collection and TablemanExtension. The Tableman module is reponsible for the API to manipulate data. Columnizer is reponsible to translate many types and formats of data into something that Tableman will be able to work with. Collection (borrwed from Laravel 4) is reponsible for enrichement of the API, many generic methods are included with Collection that work very well. TablemanExtension is a module reposonsible of providing an API to Tableman Extension Developers which makes it easier to extend Tableman with own features.
+
 ## What's included
 These are things you might want to exclude from your package if you already have them.
 > Note: For foreign libraries default mappings are used so for example Laravel 4 Collection would be mapped to Illuminate\Support\Collection
