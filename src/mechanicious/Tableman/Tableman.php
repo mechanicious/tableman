@@ -10,8 +10,6 @@ use Jacopo\Bootstrap3Table\BootstrapTable;
 * Tableman
 * Provides a convenient API for manipulation and 
 * creation of tables.
-* 
-* TODO: Write missing tests.
 */
 class Tableman extends Collection
 {
@@ -39,10 +37,10 @@ class Tableman extends Collection
   }
   
 
-  private function getHTML(){// TODO
+  private function getHtml(){// TODO
   }
   
-  private function getXML(){// TODO
+  private function getXml(){// TODO
   }
 
   /**
@@ -72,7 +70,7 @@ class Tableman extends Collection
    *  
    * @return mechanicious\Tableman\Tableman;
    */
-  public function reverseColumns()
+  public function reverseColumnOrder()
   {
     $this->reverse();
     return $this;
@@ -353,7 +351,7 @@ class Tableman extends Collection
    * @param   array  $config
    * @return  string
    */
-  public function getBS3Table($limit = null, $header = array(), $extraClasses = array(), $config = array())
+  public function getBs3Table($limit = null, $header = array(), $extraClasses = array(), $config = array())
   {
     $items = &$this->items;
     $columnNames = array_keys($this->items);
@@ -406,22 +404,16 @@ class Tableman extends Collection
   }
 
   /**
-   * Get the rows as an array
+   * Get referenced-rows as an array
    * 
    * @return  array
    */
   public function getRows()
   {
-    // A short explanation. 
-    // For each column we'll loop though the rows.
-    // If the row index doesn't exist in the mergee then we'll push the row
-    // into the mergee. Otherwise we won't. See assembleRow() for how a row
-    // is being assembled.
-    // We could just loop through one of the columns, but we want to deal with
-    // asymmetric arrays as well.
     $items  = &$this->items;
     $mergee = array();
     $columnNames = array_keys($this->items);
+    // We assume the present data is symmetric
     for($i = 0; $i < count($this->first()); $i++)
     {
       $row = array();
@@ -432,46 +424,6 @@ class Tableman extends Collection
       $mergee[] = $row;
     }
     return $mergee;
-  }
-
-  /**
-   * Assemble a row from columns
-   * 
-   * @param   array $columnNames
-   * @param   int $index
-   * @return  array
-   */
-  protected function assembleRow(&$columnNames, $index)
-  {
-    // Notice we deal with asymmetric arrays. If the index doesn't
-    // exist in the co-columns then we'll push for those column-index
-    // combination a null.
-    $row = array();
-    array_walk($columnNames, function($column) use($index, &$row) {
-      // Note we'll bind the column name to cells as well, although it's not really
-      // necessary. To make sure we'll not mix the data in some unwanted way.
-      if(isset($this[$column][$index])) return $row[$column] = $this[$column][$index];
-      // This is how a row "looks like."
-      // array(
-      // array('id' => 'Tony', 'name' => 'Tony', 'age' => '27')
-      // );
-      return $row[$column] = null; 
-    });
-    return $row;
-  }
-
-  /**
-   * Unlike getColumn headers this function doesn't get the keys
-   * of the current set, but the header of the columns obtained
-   * with getHeader()
-   * 
-   * @return array
-   */
-  protected function getGeunineColumnHeaders()
-  {
-    return array_map($this->items, function($column) {
-      return $column->getHeader();
-    });
   }
 
   /**

@@ -20,11 +20,11 @@ class Columnizer
   }
 
   /**
-   *  Go from rows to columns
+   *  Split an array of rows into symmetric columns 
    * 
    * @return  mechanicious\Columnizer\ColumnBag
    */
-  public function columnize()
+  public function columnizeArrayRows()
   {
     if($this->items instanceof ColumnBag) return $this->items;
     // Somtimes the data has already a columnized structure, then you
@@ -39,7 +39,7 @@ class Columnizer
   }
 
   /**
-   *  Pre-fill missing collumns to line the rows up 
+   *  Pre-fill missing columns to line the rows up 
    * @return  void
    */
   protected function symmetrize()

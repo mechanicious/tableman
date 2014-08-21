@@ -54,8 +54,8 @@ class Other extends \PHPUnit_Framework_TestCase
 
   public function testColumnizerColumnizeItems()
   {
-    $columnizer = $columnizer = new \mechanicious\Columnizer\Columnizer($this->mockData);
-    $this->assertEquals($columnizer->columnizeItems(), array(
+    $columnizer = new \mechanicious\Columnizer\Columnizer($this->mockData);
+    $this->assertEquals($columnizer->columnizeArrayRow(), array(
       'id'  => array(1, 2),
       'name'  => array('Joe', 'Tony'),
       'age' => array(25, 27),
