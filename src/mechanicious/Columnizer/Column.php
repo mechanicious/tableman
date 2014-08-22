@@ -31,7 +31,7 @@ class Column extends Collection
    * @param  int $amount
    * @return mechanicious\Columnizer\Column
    */
-  public function chop($amount)
+  public function chop($amount = 1)
   {
     $endOffset = count($this->items) - $amount;
     $slice = array_slice($this->items, 0, $endOffset, $preserveKeys = true);

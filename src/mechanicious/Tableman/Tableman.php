@@ -3,8 +3,9 @@
 use mechanicious\Columnizer\ColumnBag;
 use mechanicious\Columnizer\Column;
 use mechanicious\Columnizer\Columnizer;
+use mechanicious\TablemanExtension\TablemanExtension;
+use mechanicious\TablemanExtension\Config;
 use Illuminate\Support\Collection;
-use Jacopo\Bootstrap3Table\BootstrapTable;
 
 /**
 * Tableman
@@ -13,6 +14,12 @@ use Jacopo\Bootstrap3Table\BootstrapTable;
 */
 class Tableman extends Collection
 {
+  /**
+   * Holds the extensions
+   * @var array
+   */
+  protected $exts = array();
+
   public function __construct(ColumnBag $cols)
   {
     $this->items = $cols->all();
@@ -20,6 +27,7 @@ class Tableman extends Collection
 
   /**
    *  Get JSON representation of the data
+   * 
    * @return string
    */
   public function getJson($format = 'column')
@@ -56,6 +64,7 @@ class Tableman extends Collection
 
   /**
    * Sort columns with a callback function
+   * 
    * @param  closure $callback
    * @return mechanicious\Tableman\Tableman;
    */
@@ -118,6 +127,7 @@ class Tableman extends Collection
 
   /**
    * Get current headers of columns
+   * 
    * @return array
    */
   public function getColumnHeaders()
@@ -193,6 +203,7 @@ class Tableman extends Collection
 
   /**
    * Prepend column
+   * 
    * @param  Column $col
    * @return mechanicious\Tableman\Tableman;
    */
@@ -204,6 +215,7 @@ class Tableman extends Collection
 
   /**
    * Append column
+   * 
    * @param  Column $col
    * @return mechanicious\Tableman\Tableman;
    */
@@ -227,8 +239,8 @@ class Tableman extends Collection
 
   /**
    * Remove first column
-   * @param  string $header
    * 
+   * @param  string $header
    * @return mechanicious\Tableman\Tableman
    */
   public function shiftColumn($header)
@@ -351,36 +363,36 @@ class Tableman extends Collection
    * @param   array  $config
    * @return  string
    */
-  public function getBs3Table($limit = null, $header = array(), $extraClasses = array(), $config = array())
-  {
-    $items = &$this->items;
-    $columnNames = array_keys($this->items);
-    $rows = $this->getRows();
+  // public function getBs3Table($limit = null, $header = array(), $extraClasses = array(), $config = array())
+  // {
+  //   $items = &$this->items;
+  //   $columnNames = array_keys($this->items);
+  //   $rows = $this->getRows();
 
-    $table = new BootstrapTable();
-    $table->setConfig($config);
-    $table->setHeader($header);
-    $table->setTableExtraClasses($extraClasses);
+  //   $table = new BootstrapTable();
+  //   $table->setConfig($config);
+  //   $table->setHeader($header);
+  //   $table->setTableExtraClasses($extraClasses);
 
-    array_walk($rows, function($row, $rowIndex) use(&$table, &$columnNames, $limit) {
-      if( ! is_null($limit) && $rowIndex > $limit) return;
-      // Flatten I mean from boundary: array('columnName' => 'rowData'), to: rowData only.
-      foreach($columnNames as $columnName) // This guy dictates the order of cells
-      {
-        $flattenRows = array(); 
-        foreach($row as $columnHeader => $cell)
-        {
-          $mockedRow = array();
-          if(isset($row[$columnName])) // If this is false then data got somehow mixed up
-            $mockedRow[] = array($row[$columnName]);
-        }
-        $flattenRows[] = $row;
-      }
-      $table->addRows(array_flatten($flattenRows));
-    });
-    // __toString do the work!
-    return (string) $table;
-  }
+  //   array_walk($rows, function($row, $rowIndex) use(&$table, &$columnNames, $limit) {
+  //     if( ! is_null($limit) && $rowIndex > $limit) return;
+  //     // Flatten I mean from boundary: array('columnName' => 'rowData'), to: array('rowData').
+  //     foreach($columnNames as $columnName) // This guy dictates the order of cells
+  //     {
+  //       $flattenRows = array(); 
+  //       foreach($row as $columnHeader => $cell)
+  //       {
+  //         $mockedRow = array();
+  //         if(isset($row[$columnName])) // If this is false then data got somehow mixed up
+  //           $mockedRow[] = array($row[$columnName]);
+  //       }
+  //       $flattenRows[] = $row;
+  //     }
+  //     $table->addRows(array_flatten($flattenRows));
+  //   });
+  //   // __toString do the work!
+  //   return (string) $table;
+  // }
 
   /**
    * Get a column by it's header
@@ -434,28 +446,62 @@ class Tableman extends Collection
   public function renameColumns(array $headers = array())
   {
     $items = $this->items;
-    // We'll need this to keep the order later on if user will decide
-    // to for example rename only one column instead of all. That's because
-    // we use put(), and put appends. (We're supposed to only rename the columns after all)
-    $headersCopy = $this->getColumnHeaders();
+    // We need a copy because the order will be overridden by the replace routine
+    // because in a certain situation some replacements will be skipped while still
+    // appending the other columns.
+    $headersCopy = $this->getColumnHeaders(); 
     array_walk($headers, function($newKey, $oldKey) use(&$items, &$headersCopy) {
-      // We don't want to change the key in items array only,
-      // but we want to change the key of the column as well.
-      // So we can simply replace the keys.
-      
-      // If you would do this when headers are equal, then you
-      // would clean the array out of items because you would
-      // not create any new entries and still remove old ones.
-      if($newKey !== $oldKey)
+      if($newKey !== $oldKey) // No need to bother when headers are same
       {
         $column = new Column($items[$oldKey]->all(), $newKey);
-        $this->put($newKey, $column);
         $this->forget($oldKey);
+        $this->put($newKey, $column);
+        // Replace the old header from $headersCopy with the new header
         $headersCopy[array_search($oldKey, $headersCopy)] = $newKey;
       }
     });
     // Order columns like they where before.
     $this->orderColumns($headersCopy);
     return $this;
+  }
+
+  public function __call($name, $args)
+  {
+    $autloadedClasses = get_declared_classes();
+
+    // Don't bother, it seems we did what's needed before already before.
+    if(in_array($name, array_keys($this->exts))) return $this->exts[$name]->make($this, new Config($args[0]));
+
+    /**
+     * Use existing class mechanism
+     */
+    $found = false;
+    // Let's see if the class is loaded first.
+    array_walk($autloadedClasses, function($class, $index) use($name, &$found) {
+      if(is_string($found)) return;
+      $segments = explode('\\', $class);
+      // We assume the last segment of a fully-qualified-classname is equal to the
+      // entry in the array.
+      if(last($segments) === $name) return $found = $class;
+    });
+    // Make sure it's a TablemanExtension
+    if($found && ($instance = new $found) instanceof TablemanExtension)
+    {
+      $this->exts[$name] = $instance;
+      return $this->exts[$name]->make($this, new Config($args[0]));
+    } 
+
+    /*
+     * Load non-existent class mechanism
+     */
+    $ext_reg = require "./../Config/ExtensionRegister.php";
+    if( ! in_array($name, array_keys($ext_reg))) throw new \Exception("method {$name} is not a part of " . __CLASS__);
+    require_once $ext_reg[$name]['relative_path'];
+    $classname = $ext_reg[$name]['fully_qualified_classname'];
+    $instance = new $classname;
+    $this->exts[$name] = $instance;
+    if( ! isset($args[0])) throw new \Exception("you must provide a config for {$name}");
+    if( ! is_array($args[0])) throw new \Exception("config for {$name} must be an array");
+    return $this->exts[$name]->make($this, new Config($args[0]));
   }
 }

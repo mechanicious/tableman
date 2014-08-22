@@ -1,4 +1,5 @@
 <?php namespace mechanicious\Test;
+use mechanicious\Columnizer\Column;
 
 require_once __dir__ . '/../../../vendor/autoload.php';
 
@@ -28,6 +29,7 @@ class Tests extends \PHPUnit_Framework_TestCase
    */
   public function cleanWhiteSpace($string, $replace = "")
   {
+    // Make sure you don't use this method together with whitespace sensitive testing
     return str_replace(array("\n", "\r", "\t", " "), $replace, $string);
   }
 
@@ -63,34 +65,37 @@ class Tests extends \PHPUnit_Framework_TestCase
   {
     $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
     $tableman = new \mechanicious\Tableman\Tableman($columnBag);
-    $this->assertEquals(
-      // Unfortunately got a little messy!
-      $this->cleanWhiteSpace($tableman->getBS3Table()), 
-      $this->cleanWhiteSpace('
-      <table  class="table ">
-            <thead>
-                    <tr>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                            <th></th>
-                    </tr>
-            </thead>
-            <tbody>
-                    <tr>
-                            <td>1</td>
-                            <td>Joe</td>
-                            <td>25</td>
-                            <td></td>
-                    </tr>
-                    <tr>
-                            <td>2</td>
-                            <td>Tony</td>
-                            <td>27</td>
-                            <td>sport</td>
-                    </tr>
-            </tbody>
-      </table>'));
+     $this->assertEquals(
+      $this->cleanWhiteSpace($tableman->Bs3Table(array(
+          'config' => array(),
+          'header' => array(),
+          'extra_classes' => array(),
+          'limit' => 10))),
+        $this->cleanWhiteSpace('
+        <table  class="table ">
+              <thead>
+                      <tr>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                      </tr>
+              </thead>
+              <tbody>
+                      <tr>
+                              <td>1</td>
+                              <td>Joe</td>
+                              <td>25</td>
+                              <td></td>
+                      </tr>
+                      <tr>
+                              <td>2</td>
+                              <td>Tony</td>
+                              <td>27</td>
+                              <td>sport</td>
+                      </tr>
+              </tbody>
+        </table>'));
   }
 
   public function testTablemanToJSON()
@@ -323,4 +328,41 @@ class Tests extends \PHPUnit_Framework_TestCase
       }'
     ));
   }
+
+  public function testTablemanBs3TableExtension()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertEquals(
+      $this->cleanWhiteSpace($tableman->Bs3Table(array(
+          'config' => array(),
+          'header' => array(),
+          'extra_classes' => array(),
+          'limit' => 10))),
+        $this->cleanWhiteSpace('
+        <table  class="table ">
+              <thead>
+                      <tr>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                              <th></th>
+                      </tr>
+              </thead>
+              <tbody>
+                      <tr>
+                              <td>1</td>
+                              <td>Joe</td>
+                              <td>25</td>
+                              <td></td>
+                      </tr>
+                      <tr>
+                              <td>2</td>
+                              <td>Tony</td>
+                              <td>27</td>
+                              <td>sport</td>
+                      </tr>
+              </tbody>
+        </table>'));
+  } 
 }
