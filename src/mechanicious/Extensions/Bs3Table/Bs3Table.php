@@ -7,8 +7,8 @@ use Jacopo\Bootstrap3Table\BootstrapTable;
 
 class Bs3Table extends TablemanExtension
 {
-	public function make(Tableman &$ref, Config $conf)
-	{
+  public function make(Tableman &$ref, Config $conf)
+  {
     $items = $ref->getColumns();
     $columnNames = $ref->getColumnHeaders();
     $rows = $ref->getRows();
@@ -37,5 +37,5 @@ class Bs3Table extends TablemanExtension
     });
     // __toString do the work!
     return (string) $table;
-	}
+  }
 }
