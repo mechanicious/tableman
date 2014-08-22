@@ -5,5 +5,5 @@ use mechanicious\TablemanExtension\Config;
 
 interface TablemanExtensionMakeInterface
 {
-	public function make(Tableman &$reference, Config $config);
+  public function make(Tableman &$reference, Config $config);
 }
