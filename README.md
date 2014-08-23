@@ -3,9 +3,9 @@
 ## Contents
   * [Latest API](http://mechanicious.github.io/tableman/)
   * [Tableman](https://github.com/mechanicious/tableman#tableman)
-  * [Tableman Modularity](https://github.com/mechanicious/tableman#tableman modularity)
-  * [What's included](https://github.com/mechanicious/tableman#what's included)
-  * [Tableman usecases](https://github.com/mechanicious/tableman#tableman usecases)
+  * [Tableman Modularity](https://github.com/mechanicious/tableman#tableman-modularity)
+  * [What's included](https://github.com/mechanicious/tableman#what's-included)
+  * [Tableman usecases](https://github.com/mechanicious/tableman#tableman-usecases)
 
 ## Tableman
 
