@@ -5,8 +5,21 @@ use mechanicious\TablemanExtension\Config;
 use mechanicious\Tableman\Tableman;
 use Jacopo\Bootstrap3Table\BootstrapTable;
 
+/**
+ * Is responsible for creating a HTML Boostrap 3 Table
+ */
 class Bs3Table extends TablemanExtension
 {
+
+  /**
+   * Creates the table
+   *     
+   * @param  Tableman $ref
+   * @param  Config   $conf
+   * @config config, headers, extra_classes
+   * @usage  https://github.com/mechanicious/tableman/wiki/Bs3Table-Extension-Usage
+   * @return string
+   */
   public function make(Tableman &$ref, Config $conf)
   {
     $items = $ref->getColumns();
