@@ -1,0 +1,21 @@
+{
+    "name": "mechanicious/tableman",
+    "description": "Tables made easy",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Mateusz Zawartka",
+            "email": "mkzawartka@gmail.com"
+        }
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "mechanicious/laravel4-collection": "dev-master",
+        "mechanicious/laravel4-helper-methods": "dev-master",
+        "jacopo/bootstrap-3-table-generator": "dev-master"
+    },
+    "autoload":
+    {
+    	"psr-4": {"mechanicious\\": "src/mechanicious/"}
+    }
+}
