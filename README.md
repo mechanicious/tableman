@@ -69,7 +69,7 @@ $data = array(
         'age'   => 27
     ),
 );
-$columnizer = new Columnizer($data); // Data converversion
+$columnizer = new Columnizer($data); // Data converersion
 $tableman   = new Tableman($columnizer->columnizeRowArray()); // Data modeling
 
 // Custom filters
