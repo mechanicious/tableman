@@ -73,13 +73,13 @@ $columnizer = new Columnizer($data); // Data conversion
 $tableman   = new Tableman($columnizer->columnizeRowArray()); // Data modeling
 
 // Custom filters
-$tableman->eachRow(function(&$_this, &row, $index) { 
+$tableman->eachRow(function(&$_this, &$row, $index) { 
     if($row['id'] === 1) unset($row);
 })
 
 // Custom extensions
 $tableman->Bs3Table(new Config(array(
- // Plugin-like Configuration
+ // Plugin-like configuration
  'config'=>array(), 
  'header'=> array(), 
  'extra_classes'=>array()
