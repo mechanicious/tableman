@@ -296,8 +296,9 @@ class Tableman extends Collection
   /**
    * Apply a callback on each row belonging to a specified column
    * 
-   * @param  closure $callback
-   * @return mechanicious\Tableman\Tableman
+   * @param     closure $callback
+   * @callback  function(&$ref, &$row, $rowIndex) {}
+   * @return    mechanicious\Tableman\Tableman
    */
   public function eachRowOf(\closure $callback, $header)
   {
@@ -311,8 +312,9 @@ class Tableman extends Collection
   /**
    * Apply a callback on each row
    * 
-   * @param  closure $callback
-   * @return mechanicious\Tableman\Tableman
+   * @param     closure $callback
+   * @callback  function(&$ref, &$row, $rowIndex) {}
+   * @return    mechanicious\Tableman\Tableman
    */
   public function eachRow(\closure $callback) 
   {
@@ -326,25 +328,27 @@ class Tableman extends Collection
   /**
    * Apply a callback on each cell
    * 
-   * @param  closure $callback
-   * @return mechanicious\Tableman\Tableman
+   * @param     closure $callback
+   * @callback  function(&$ref, &$cell, &$cellColumn, $columnHeader, &$row, $rowIndex) {}
+   * @return    mechanicious\Tableman\Tableman
    */
   public function eachCell(closure $callback) 
   {
     array_walk($this->getRows(), function(&$row, &$rowIndex) use(&$rows, $callback) {
       foreach($row as $cellColumn => &$cell)
       {
-        $callback($this, $cell, $cellColumn, $row, $rowIndex);
+        $callback($this, $cell, $cellColumn, $cellColumn->getHeader(), $row, $rowIndex);
       }
     });
     return $this;
   }
 
   /**
-   * Apply a callback to each column
+   * Apply a callback on each column
    * 
-   * @param  closure $callback
-   * @return mechanicious\Tableman\Tableman
+   * @param     closure $callback
+   * @callback  function(&$ref, &$column, $header) {}
+   * @return    mechanicious\Tableman\Tableman
    */
   public function eachColumn(\closure $callback) 
   {
@@ -353,46 +357,6 @@ class Tableman extends Collection
     });
     return $this;
   }
-
-  /**
-   * Create an Bootstrap 3 Table HTML markup.
-   * 
-   * @param   int $limit
-   * @param   array $header
-   * @param   array $extraClasses
-   * @param   array  $config
-   * @return  string
-   */
-  // public function getBs3Table($limit = null, $header = array(), $extraClasses = array(), $config = array())
-  // {
-  //   $items = &$this->items;
-  //   $columnNames = array_keys($this->items);
-  //   $rows = $this->getRows();
-
-  //   $table = new BootstrapTable();
-  //   $table->setConfig($config);
-  //   $table->setHeader($header);
-  //   $table->setTableExtraClasses($extraClasses);
-
-  //   array_walk($rows, function($row, $rowIndex) use(&$table, &$columnNames, $limit) {
-  //     if( ! is_null($limit) && $rowIndex > $limit) return;
-  //     // Flatten I mean from boundary: array('columnName' => 'rowData'), to: array('rowData').
-  //     foreach($columnNames as $columnName) // This guy dictates the order of cells
-  //     {
-  //       $flattenRows = array(); 
-  //       foreach($row as $columnHeader => $cell)
-  //       {
-  //         $mockedRow = array();
-  //         if(isset($row[$columnName])) // If this is false then data got somehow mixed up
-  //           $mockedRow[] = array($row[$columnName]);
-  //       }
-  //       $flattenRows[] = $row;
-  //     }
-  //     $table->addRows(array_flatten($flattenRows));
-  //   });
-  //   // __toString do the work!
-  //   return (string) $table;
-  // }
 
   /**
    * Get a column by it's header
@@ -494,7 +458,7 @@ class Tableman extends Collection
     /*
      * Load non-existent class mechanism
      */
-    $ext_reg = require "./../Config/ExtensionRegister.php";
+    $ext_reg = require "/../Config/ExtensionRegister.php";
     if( ! in_array($name, array_keys($ext_reg))) throw new \Exception("method {$name} is not a part of " . __CLASS__);
     require_once $ext_reg[$name]['relative_path'];
     $classname = $ext_reg[$name]['fully_qualified_classname'];
