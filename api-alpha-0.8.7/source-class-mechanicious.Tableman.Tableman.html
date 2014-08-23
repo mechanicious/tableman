@@ -388,215 +388,179 @@
 </span><span id="296" class="l"><a class="l" href="#296">296: </a>  <span class="php-comment">/**
 </span></span><span id="297" class="l"><a class="l" href="#297">297: </a><span class="php-comment">   * Apply a callback on each row belonging to a specified column
 </span></span><span id="298" class="l"><a class="l" href="#298">298: </a><span class="php-comment">   * 
-</span></span><span id="299" class="l"><a class="l" href="#299">299: </a><span class="php-comment">   * @param  closure $callback
-</span></span><span id="300" class="l"><a class="l" href="#300">300: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
-</span></span><span id="301" class="l"><a class="l" href="#301">301: </a><span class="php-comment">   */</span>
-</span><span id="302" class="l"><a class="l" href="#302">302: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_eachRowOf" href="#_eachRowOf">eachRowOf</a>(\closure <span class="php-var">$callback</span>, <span class="php-var">$header</span>)
-</span><span id="303" class="l"><a class="l" href="#303">303: </a>  {
-</span><span id="304" class="l"><a class="l" href="#304">304: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$this</span>-&gt;items[<span class="php-var">$header</span>]-&gt;items, <span class="php-keyword1">function</span>(&amp;<span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>) <span class="php-keyword1">use</span>(<span class="php-var">$callback</span>)
-</span><span id="305" class="l"><a class="l" href="#305">305: </a>    {
-</span><span id="306" class="l"><a class="l" href="#306">306: </a>      <span class="php-var">$callback</span>(<span class="php-var">$this</span>, <span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>);
-</span><span id="307" class="l"><a class="l" href="#307">307: </a>    });
-</span><span id="308" class="l"><a class="l" href="#308">308: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="309" class="l"><a class="l" href="#309">309: </a>  }
-</span><span id="310" class="l"><a class="l" href="#310">310: </a>
-</span><span id="311" class="l"><a class="l" href="#311">311: </a>  <span class="php-comment">/**
-</span></span><span id="312" class="l"><a class="l" href="#312">312: </a><span class="php-comment">   * Apply a callback on each row
-</span></span><span id="313" class="l"><a class="l" href="#313">313: </a><span class="php-comment">   * 
-</span></span><span id="314" class="l"><a class="l" href="#314">314: </a><span class="php-comment">   * @param  closure $callback
-</span></span><span id="315" class="l"><a class="l" href="#315">315: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
-</span></span><span id="316" class="l"><a class="l" href="#316">316: </a><span class="php-comment">   */</span>
-</span><span id="317" class="l"><a class="l" href="#317">317: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_eachRow" href="#_eachRow">eachRow</a>(\closure <span class="php-var">$callback</span>) 
-</span><span id="318" class="l"><a class="l" href="#318">318: </a>  {
-</span><span id="319" class="l"><a class="l" href="#319">319: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$this</span>-&gt;getRows(), <span class="php-keyword1">function</span>(&amp;<span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>) <span class="php-keyword1">use</span>(<span class="php-var">$callback</span>)
-</span><span id="320" class="l"><a class="l" href="#320">320: </a>    {
-</span><span id="321" class="l"><a class="l" href="#321">321: </a>      <span class="php-var">$callback</span>(<span class="php-var">$this</span>, <span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>);
-</span><span id="322" class="l"><a class="l" href="#322">322: </a>    });
-</span><span id="323" class="l"><a class="l" href="#323">323: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="324" class="l"><a class="l" href="#324">324: </a>  }
-</span><span id="325" class="l"><a class="l" href="#325">325: </a>
-</span><span id="326" class="l"><a class="l" href="#326">326: </a>  <span class="php-comment">/**
-</span></span><span id="327" class="l"><a class="l" href="#327">327: </a><span class="php-comment">   * Apply a callback on each cell
-</span></span><span id="328" class="l"><a class="l" href="#328">328: </a><span class="php-comment">   * 
-</span></span><span id="329" class="l"><a class="l" href="#329">329: </a><span class="php-comment">   * @param  closure $callback
-</span></span><span id="330" class="l"><a class="l" href="#330">330: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
-</span></span><span id="331" class="l"><a class="l" href="#331">331: </a><span class="php-comment">   */</span>
-</span><span id="332" class="l"><a class="l" href="#332">332: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_eachCell" href="#_eachCell">eachCell</a>(closure <span class="php-var">$callback</span>) 
-</span><span id="333" class="l"><a class="l" href="#333">333: </a>  {
-</span><span id="334" class="l"><a class="l" href="#334">334: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$this</span>-&gt;getRows(), <span class="php-keyword1">function</span>(&amp;<span class="php-var">$row</span>, &amp;<span class="php-var">$rowIndex</span>) <span class="php-keyword1">use</span>(&amp;<span class="php-var">$rows</span>, <span class="php-var">$callback</span>) {
-</span><span id="335" class="l"><a class="l" href="#335">335: </a>      <span class="php-keyword1">foreach</span>(<span class="php-var">$row</span> <span class="php-keyword1">as</span> <span class="php-var">$cellColumn</span> =&gt; &amp;<span class="php-var">$cell</span>)
-</span><span id="336" class="l"><a class="l" href="#336">336: </a>      {
-</span><span id="337" class="l"><a class="l" href="#337">337: </a>        <span class="php-var">$callback</span>(<span class="php-var">$this</span>, <span class="php-var">$cell</span>, <span class="php-var">$cellColumn</span>, <span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>);
-</span><span id="338" class="l"><a class="l" href="#338">338: </a>      }
-</span><span id="339" class="l"><a class="l" href="#339">339: </a>    });
-</span><span id="340" class="l"><a class="l" href="#340">340: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="341" class="l"><a class="l" href="#341">341: </a>  }
-</span><span id="342" class="l"><a class="l" href="#342">342: </a>
-</span><span id="343" class="l"><a class="l" href="#343">343: </a>  <span class="php-comment">/**
-</span></span><span id="344" class="l"><a class="l" href="#344">344: </a><span class="php-comment">   * Apply a callback to each column
-</span></span><span id="345" class="l"><a class="l" href="#345">345: </a><span class="php-comment">   * 
-</span></span><span id="346" class="l"><a class="l" href="#346">346: </a><span class="php-comment">   * @param  closure $callback
-</span></span><span id="347" class="l"><a class="l" href="#347">347: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
-</span></span><span id="348" class="l"><a class="l" href="#348">348: </a><span class="php-comment">   */</span>
-</span><span id="349" class="l"><a class="l" href="#349">349: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_eachColumn" href="#_eachColumn">eachColumn</a>(\closure <span class="php-var">$callback</span>) 
-</span><span id="350" class="l"><a class="l" href="#350">350: </a>  {
-</span><span id="351" class="l"><a class="l" href="#351">351: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$this</span>-&gt;items, <span class="php-keyword1">function</span>(&amp;<span class="php-var">$column</span>, &amp;<span class="php-var">$columnHeader</span>) <span class="php-keyword1">use</span>(<span class="php-var">$callback</span>, &amp;<span class="php-var">$columns</span>) {
-</span><span id="352" class="l"><a class="l" href="#352">352: </a>      <span class="php-var">$callback</span>(<span class="php-var">$this</span>, <span class="php-var">$column</span>, <span class="php-var">$columnHeader</span>);      
-</span><span id="353" class="l"><a class="l" href="#353">353: </a>    });
-</span><span id="354" class="l"><a class="l" href="#354">354: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="355" class="l"><a class="l" href="#355">355: </a>  }
-</span><span id="356" class="l"><a class="l" href="#356">356: </a>
-</span><span id="357" class="l"><a class="l" href="#357">357: </a>  <span class="php-comment">/**
-</span></span><span id="358" class="l"><a class="l" href="#358">358: </a><span class="php-comment">   * Create an Bootstrap 3 Table HTML markup.
-</span></span><span id="359" class="l"><a class="l" href="#359">359: </a><span class="php-comment">   * 
-</span></span><span id="360" class="l"><a class="l" href="#360">360: </a><span class="php-comment">   * @param   int $limit
-</span></span><span id="361" class="l"><a class="l" href="#361">361: </a><span class="php-comment">   * @param   array $header
-</span></span><span id="362" class="l"><a class="l" href="#362">362: </a><span class="php-comment">   * @param   array $extraClasses
-</span></span><span id="363" class="l"><a class="l" href="#363">363: </a><span class="php-comment">   * @param   array  $config
-</span></span><span id="364" class="l"><a class="l" href="#364">364: </a><span class="php-comment">   * @return  string
-</span></span><span id="365" class="l"><a class="l" href="#365">365: </a><span class="php-comment">   */</span>
-</span><span id="366" class="l"><a class="l" href="#366">366: </a>  <span class="php-comment">// public function getBs3Table($limit = null, $header = array(), $extraClasses = array(), $config = array())</span>
-</span><span id="367" class="l"><a class="l" href="#367">367: </a>  <span class="php-comment">// {</span>
-</span><span id="368" class="l"><a class="l" href="#368">368: </a>  <span class="php-comment">//   $items = &amp;$this-&gt;items;</span>
-</span><span id="369" class="l"><a class="l" href="#369">369: </a>  <span class="php-comment">//   $columnNames = array_keys($this-&gt;items);</span>
-</span><span id="370" class="l"><a class="l" href="#370">370: </a>  <span class="php-comment">//   $rows = $this-&gt;getRows();</span>
+</span></span><span id="299" class="l"><a class="l" href="#299">299: </a><span class="php-comment">   * @param     closure $callback
+</span></span><span id="300" class="l"><a class="l" href="#300">300: </a><span class="php-comment">   * @callback  function(&amp;$ref, &amp;$row, $rowIndex) {}
+</span></span><span id="301" class="l"><a class="l" href="#301">301: </a><span class="php-comment">   * @return    mechanicious\Tableman\Tableman
+</span></span><span id="302" class="l"><a class="l" href="#302">302: </a><span class="php-comment">   */</span>
+</span><span id="303" class="l"><a class="l" href="#303">303: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_eachRowOf" href="#_eachRowOf">eachRowOf</a>(\closure <span class="php-var">$callback</span>, <span class="php-var">$header</span>)
+</span><span id="304" class="l"><a class="l" href="#304">304: </a>  {
+</span><span id="305" class="l"><a class="l" href="#305">305: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$this</span>-&gt;items[<span class="php-var">$header</span>]-&gt;items, <span class="php-keyword1">function</span>(&amp;<span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>) <span class="php-keyword1">use</span>(<span class="php-var">$callback</span>)
+</span><span id="306" class="l"><a class="l" href="#306">306: </a>    {
+</span><span id="307" class="l"><a class="l" href="#307">307: </a>      <span class="php-var">$callback</span>(<span class="php-var">$this</span>, <span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>);
+</span><span id="308" class="l"><a class="l" href="#308">308: </a>    });
+</span><span id="309" class="l"><a class="l" href="#309">309: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="310" class="l"><a class="l" href="#310">310: </a>  }
+</span><span id="311" class="l"><a class="l" href="#311">311: </a>
+</span><span id="312" class="l"><a class="l" href="#312">312: </a>  <span class="php-comment">/**
+</span></span><span id="313" class="l"><a class="l" href="#313">313: </a><span class="php-comment">   * Apply a callback on each row
+</span></span><span id="314" class="l"><a class="l" href="#314">314: </a><span class="php-comment">   * 
+</span></span><span id="315" class="l"><a class="l" href="#315">315: </a><span class="php-comment">   * @param     closure $callback
+</span></span><span id="316" class="l"><a class="l" href="#316">316: </a><span class="php-comment">   * @callback  function(&amp;$ref, &amp;$row, $rowIndex) {}
+</span></span><span id="317" class="l"><a class="l" href="#317">317: </a><span class="php-comment">   * @return    mechanicious\Tableman\Tableman
+</span></span><span id="318" class="l"><a class="l" href="#318">318: </a><span class="php-comment">   */</span>
+</span><span id="319" class="l"><a class="l" href="#319">319: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_eachRow" href="#_eachRow">eachRow</a>(\closure <span class="php-var">$callback</span>) 
+</span><span id="320" class="l"><a class="l" href="#320">320: </a>  {
+</span><span id="321" class="l"><a class="l" href="#321">321: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$this</span>-&gt;getRows(), <span class="php-keyword1">function</span>(&amp;<span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>) <span class="php-keyword1">use</span>(<span class="php-var">$callback</span>)
+</span><span id="322" class="l"><a class="l" href="#322">322: </a>    {
+</span><span id="323" class="l"><a class="l" href="#323">323: </a>      <span class="php-var">$callback</span>(<span class="php-var">$this</span>, <span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>);
+</span><span id="324" class="l"><a class="l" href="#324">324: </a>    });
+</span><span id="325" class="l"><a class="l" href="#325">325: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="326" class="l"><a class="l" href="#326">326: </a>  }
+</span><span id="327" class="l"><a class="l" href="#327">327: </a>
+</span><span id="328" class="l"><a class="l" href="#328">328: </a>  <span class="php-comment">/**
+</span></span><span id="329" class="l"><a class="l" href="#329">329: </a><span class="php-comment">   * Apply a callback on each cell
+</span></span><span id="330" class="l"><a class="l" href="#330">330: </a><span class="php-comment">   * 
+</span></span><span id="331" class="l"><a class="l" href="#331">331: </a><span class="php-comment">   * @param     closure $callback
+</span></span><span id="332" class="l"><a class="l" href="#332">332: </a><span class="php-comment">   * @callback  function(&amp;$ref, &amp;$cell, &amp;$cellColumn, $columnHeader, &amp;$row, $rowIndex) {}
+</span></span><span id="333" class="l"><a class="l" href="#333">333: </a><span class="php-comment">   * @return    mechanicious\Tableman\Tableman
+</span></span><span id="334" class="l"><a class="l" href="#334">334: </a><span class="php-comment">   */</span>
+</span><span id="335" class="l"><a class="l" href="#335">335: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_eachCell" href="#_eachCell">eachCell</a>(closure <span class="php-var">$callback</span>) 
+</span><span id="336" class="l"><a class="l" href="#336">336: </a>  {
+</span><span id="337" class="l"><a class="l" href="#337">337: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$this</span>-&gt;getRows(), <span class="php-keyword1">function</span>(&amp;<span class="php-var">$row</span>, &amp;<span class="php-var">$rowIndex</span>) <span class="php-keyword1">use</span>(&amp;<span class="php-var">$rows</span>, <span class="php-var">$callback</span>) {
+</span><span id="338" class="l"><a class="l" href="#338">338: </a>      <span class="php-keyword1">foreach</span>(<span class="php-var">$row</span> <span class="php-keyword1">as</span> <span class="php-var">$cellColumn</span> =&gt; &amp;<span class="php-var">$cell</span>)
+</span><span id="339" class="l"><a class="l" href="#339">339: </a>      {
+</span><span id="340" class="l"><a class="l" href="#340">340: </a>        <span class="php-var">$callback</span>(<span class="php-var">$this</span>, <span class="php-var">$cell</span>, <span class="php-var">$cellColumn</span>, <span class="php-var">$cellColumn</span>-&gt;getHeader(), <span class="php-var">$row</span>, <span class="php-var">$rowIndex</span>);
+</span><span id="341" class="l"><a class="l" href="#341">341: </a>      }
+</span><span id="342" class="l"><a class="l" href="#342">342: </a>    });
+</span><span id="343" class="l"><a class="l" href="#343">343: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="344" class="l"><a class="l" href="#344">344: </a>  }
+</span><span id="345" class="l"><a class="l" href="#345">345: </a>
+</span><span id="346" class="l"><a class="l" href="#346">346: </a>  <span class="php-comment">/**
+</span></span><span id="347" class="l"><a class="l" href="#347">347: </a><span class="php-comment">   * Apply a callback on each column
+</span></span><span id="348" class="l"><a class="l" href="#348">348: </a><span class="php-comment">   * 
+</span></span><span id="349" class="l"><a class="l" href="#349">349: </a><span class="php-comment">   * @param     closure $callback
+</span></span><span id="350" class="l"><a class="l" href="#350">350: </a><span class="php-comment">   * @callback  function(&amp;$ref, &amp;$column, $header) {}
+</span></span><span id="351" class="l"><a class="l" href="#351">351: </a><span class="php-comment">   * @return    mechanicious\Tableman\Tableman
+</span></span><span id="352" class="l"><a class="l" href="#352">352: </a><span class="php-comment">   */</span>
+</span><span id="353" class="l"><a class="l" href="#353">353: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_eachColumn" href="#_eachColumn">eachColumn</a>(\closure <span class="php-var">$callback</span>) 
+</span><span id="354" class="l"><a class="l" href="#354">354: </a>  {
+</span><span id="355" class="l"><a class="l" href="#355">355: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$this</span>-&gt;items, <span class="php-keyword1">function</span>(&amp;<span class="php-var">$column</span>, &amp;<span class="php-var">$columnHeader</span>) <span class="php-keyword1">use</span>(<span class="php-var">$callback</span>, &amp;<span class="php-var">$columns</span>) {
+</span><span id="356" class="l"><a class="l" href="#356">356: </a>      <span class="php-var">$callback</span>(<span class="php-var">$this</span>, <span class="php-var">$column</span>, <span class="php-var">$columnHeader</span>);      
+</span><span id="357" class="l"><a class="l" href="#357">357: </a>    });
+</span><span id="358" class="l"><a class="l" href="#358">358: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="359" class="l"><a class="l" href="#359">359: </a>  }
+</span><span id="360" class="l"><a class="l" href="#360">360: </a>
+</span><span id="361" class="l"><a class="l" href="#361">361: </a>  <span class="php-comment">/**
+</span></span><span id="362" class="l"><a class="l" href="#362">362: </a><span class="php-comment">   * Get a column by it's header
+</span></span><span id="363" class="l"><a class="l" href="#363">363: </a><span class="php-comment">   *   
+</span></span><span id="364" class="l"><a class="l" href="#364">364: </a><span class="php-comment">   * @param  string $header
+</span></span><span id="365" class="l"><a class="l" href="#365">365: </a><span class="php-comment">   * @return mechanicious\Columnizer\Column;
+</span></span><span id="366" class="l"><a class="l" href="#366">366: </a><span class="php-comment">   */</span>
+</span><span id="367" class="l"><a class="l" href="#367">367: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getColumn" href="#_getColumn">getColumn</a>(<span class="php-var">$header</span>)
+</span><span id="368" class="l"><a class="l" href="#368">368: </a>  {
+</span><span id="369" class="l"><a class="l" href="#369">369: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>[<span class="php-var">$header</span>];
+</span><span id="370" class="l"><a class="l" href="#370">370: </a>  }
 </span><span id="371" class="l"><a class="l" href="#371">371: </a>
-</span><span id="372" class="l"><a class="l" href="#372">372: </a>  <span class="php-comment">//   $table = new BootstrapTable();</span>
-</span><span id="373" class="l"><a class="l" href="#373">373: </a>  <span class="php-comment">//   $table-&gt;setConfig($config);</span>
-</span><span id="374" class="l"><a class="l" href="#374">374: </a>  <span class="php-comment">//   $table-&gt;setHeader($header);</span>
-</span><span id="375" class="l"><a class="l" href="#375">375: </a>  <span class="php-comment">//   $table-&gt;setTableExtraClasses($extraClasses);</span>
-</span><span id="376" class="l"><a class="l" href="#376">376: </a>
-</span><span id="377" class="l"><a class="l" href="#377">377: </a>  <span class="php-comment">//   array_walk($rows, function($row, $rowIndex) use(&amp;$table, &amp;$columnNames, $limit) {</span>
-</span><span id="378" class="l"><a class="l" href="#378">378: </a>  <span class="php-comment">//     if( ! is_null($limit) &amp;&amp; $rowIndex &gt; $limit) return;</span>
-</span><span id="379" class="l"><a class="l" href="#379">379: </a>  <span class="php-comment">//     // Flatten I mean from boundary: array('columnName' =&gt; 'rowData'), to: array('rowData').</span>
-</span><span id="380" class="l"><a class="l" href="#380">380: </a>  <span class="php-comment">//     foreach($columnNames as $columnName) // This guy dictates the order of cells</span>
-</span><span id="381" class="l"><a class="l" href="#381">381: </a>  <span class="php-comment">//     {</span>
-</span><span id="382" class="l"><a class="l" href="#382">382: </a>  <span class="php-comment">//       $flattenRows = array(); </span>
-</span><span id="383" class="l"><a class="l" href="#383">383: </a>  <span class="php-comment">//       foreach($row as $columnHeader =&gt; $cell)</span>
-</span><span id="384" class="l"><a class="l" href="#384">384: </a>  <span class="php-comment">//       {</span>
-</span><span id="385" class="l"><a class="l" href="#385">385: </a>  <span class="php-comment">//         $mockedRow = array();</span>
-</span><span id="386" class="l"><a class="l" href="#386">386: </a>  <span class="php-comment">//         if(isset($row[$columnName])) // If this is false then data got somehow mixed up</span>
-</span><span id="387" class="l"><a class="l" href="#387">387: </a>  <span class="php-comment">//           $mockedRow[] = array($row[$columnName]);</span>
-</span><span id="388" class="l"><a class="l" href="#388">388: </a>  <span class="php-comment">//       }</span>
-</span><span id="389" class="l"><a class="l" href="#389">389: </a>  <span class="php-comment">//       $flattenRows[] = $row;</span>
-</span><span id="390" class="l"><a class="l" href="#390">390: </a>  <span class="php-comment">//     }</span>
-</span><span id="391" class="l"><a class="l" href="#391">391: </a>  <span class="php-comment">//     $table-&gt;addRows(array_flatten($flattenRows));</span>
-</span><span id="392" class="l"><a class="l" href="#392">392: </a>  <span class="php-comment">//   });</span>
-</span><span id="393" class="l"><a class="l" href="#393">393: </a>  <span class="php-comment">//   // __toString do the work!</span>
-</span><span id="394" class="l"><a class="l" href="#394">394: </a>  <span class="php-comment">//   return (string) $table;</span>
-</span><span id="395" class="l"><a class="l" href="#395">395: </a>  <span class="php-comment">// }</span>
-</span><span id="396" class="l"><a class="l" href="#396">396: </a>
-</span><span id="397" class="l"><a class="l" href="#397">397: </a>  <span class="php-comment">/**
-</span></span><span id="398" class="l"><a class="l" href="#398">398: </a><span class="php-comment">   * Get a column by it's header
-</span></span><span id="399" class="l"><a class="l" href="#399">399: </a><span class="php-comment">   *   
-</span></span><span id="400" class="l"><a class="l" href="#400">400: </a><span class="php-comment">   * @param  string $header
-</span></span><span id="401" class="l"><a class="l" href="#401">401: </a><span class="php-comment">   * @return mechanicious\Columnizer\Column;
-</span></span><span id="402" class="l"><a class="l" href="#402">402: </a><span class="php-comment">   */</span>
-</span><span id="403" class="l"><a class="l" href="#403">403: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getColumn" href="#_getColumn">getColumn</a>(<span class="php-var">$header</span>)
-</span><span id="404" class="l"><a class="l" href="#404">404: </a>  {
-</span><span id="405" class="l"><a class="l" href="#405">405: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>[<span class="php-var">$header</span>];
-</span><span id="406" class="l"><a class="l" href="#406">406: </a>  }
-</span><span id="407" class="l"><a class="l" href="#407">407: </a>
-</span><span id="408" class="l"><a class="l" href="#408">408: </a>  <span class="php-comment">/**
-</span></span><span id="409" class="l"><a class="l" href="#409">409: </a><span class="php-comment">   * Get columns
-</span></span><span id="410" class="l"><a class="l" href="#410">410: </a><span class="php-comment">   * 
-</span></span><span id="411" class="l"><a class="l" href="#411">411: </a><span class="php-comment">   * @return array
-</span></span><span id="412" class="l"><a class="l" href="#412">412: </a><span class="php-comment">   */</span>
-</span><span id="413" class="l"><a class="l" href="#413">413: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getAllColumns" href="#_getAllColumns">getAllColumns</a>()
-</span><span id="414" class="l"><a class="l" href="#414">414: </a>  {
-</span><span id="415" class="l"><a class="l" href="#415">415: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;items;
-</span><span id="416" class="l"><a class="l" href="#416">416: </a>  }
-</span><span id="417" class="l"><a class="l" href="#417">417: </a>
-</span><span id="418" class="l"><a class="l" href="#418">418: </a>  <span class="php-comment">/**
-</span></span><span id="419" class="l"><a class="l" href="#419">419: </a><span class="php-comment">   * Get referenced-rows as an array
-</span></span><span id="420" class="l"><a class="l" href="#420">420: </a><span class="php-comment">   * 
-</span></span><span id="421" class="l"><a class="l" href="#421">421: </a><span class="php-comment">   * @return  array
-</span></span><span id="422" class="l"><a class="l" href="#422">422: </a><span class="php-comment">   */</span>
-</span><span id="423" class="l"><a class="l" href="#423">423: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getRows" href="#_getRows">getRows</a>()
-</span><span id="424" class="l"><a class="l" href="#424">424: </a>  {
-</span><span id="425" class="l"><a class="l" href="#425">425: </a>    <span class="php-var">$items</span>  = &amp;<span class="php-var">$this</span>-&gt;items;
-</span><span id="426" class="l"><a class="l" href="#426">426: </a>    <span class="php-var">$mergee</span> = <span class="php-keyword1">array</span>();
-</span><span id="427" class="l"><a class="l" href="#427">427: </a>    <span class="php-var">$columnNames</span> = <span class="php-keyword2">array_keys</span>(<span class="php-var">$this</span>-&gt;items);
-</span><span id="428" class="l"><a class="l" href="#428">428: </a>    <span class="php-comment">// We assume the present data is symmetric</span>
-</span><span id="429" class="l"><a class="l" href="#429">429: </a>    <span class="php-keyword1">for</span>(<span class="php-var">$i</span> = <span class="php-num">0</span>; <span class="php-var">$i</span> &lt; <span class="php-keyword2">count</span>(<span class="php-var">$this</span>-&gt;first()); <span class="php-var">$i</span>++)
-</span><span id="430" class="l"><a class="l" href="#430">430: </a>    {
-</span><span id="431" class="l"><a class="l" href="#431">431: </a>      <span class="php-var">$row</span> = <span class="php-keyword1">array</span>();
-</span><span id="432" class="l"><a class="l" href="#432">432: </a>      <span class="php-keyword1">foreach</span>(<span class="php-var">$items</span> <span class="php-keyword1">as</span> <span class="php-var">$header</span> =&gt; &amp;<span class="php-var">$column</span>)
-</span><span id="433" class="l"><a class="l" href="#433">433: </a>      {
-</span><span id="434" class="l"><a class="l" href="#434">434: </a>        <span class="php-var">$row</span>[<span class="php-var">$header</span>] = &amp;<span class="php-var">$column</span>-&gt;items[<span class="php-var">$i</span>];
-</span><span id="435" class="l"><a class="l" href="#435">435: </a>      }
-</span><span id="436" class="l"><a class="l" href="#436">436: </a>      <span class="php-var">$mergee</span>[] = <span class="php-var">$row</span>;
-</span><span id="437" class="l"><a class="l" href="#437">437: </a>    }
-</span><span id="438" class="l"><a class="l" href="#438">438: </a>    <span class="php-keyword1">return</span> <span class="php-var">$mergee</span>;
-</span><span id="439" class="l"><a class="l" href="#439">439: </a>  }
-</span><span id="440" class="l"><a class="l" href="#440">440: </a>
-</span><span id="441" class="l"><a class="l" href="#441">441: </a>  <span class="php-comment">/**
-</span></span><span id="442" class="l"><a class="l" href="#442">442: </a><span class="php-comment">   * Rename Headers
-</span></span><span id="443" class="l"><a class="l" href="#443">443: </a><span class="php-comment">   * 
-</span></span><span id="444" class="l"><a class="l" href="#444">444: </a><span class="php-comment">   * @return void
-</span></span><span id="445" class="l"><a class="l" href="#445">445: </a><span class="php-comment">   */</span>
-</span><span id="446" class="l"><a class="l" href="#446">446: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_renameColumns" href="#_renameColumns">renameColumns</a>(<span class="php-keyword1">array</span> <span class="php-var">$headers</span> = <span class="php-keyword1">array</span>())
-</span><span id="447" class="l"><a class="l" href="#447">447: </a>  {
-</span><span id="448" class="l"><a class="l" href="#448">448: </a>    <span class="php-var">$items</span> = <span class="php-var">$this</span>-&gt;items;
-</span><span id="449" class="l"><a class="l" href="#449">449: </a>    <span class="php-comment">// We need a copy because the order will be overridden by the replace routine</span>
-</span><span id="450" class="l"><a class="l" href="#450">450: </a>    <span class="php-comment">// because in a certain situation some replacements will be skipped while still</span>
-</span><span id="451" class="l"><a class="l" href="#451">451: </a>    <span class="php-comment">// appending the other columns.</span>
-</span><span id="452" class="l"><a class="l" href="#452">452: </a>    <span class="php-var">$headersCopy</span> = <span class="php-var">$this</span>-&gt;getColumnHeaders(); 
-</span><span id="453" class="l"><a class="l" href="#453">453: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$headers</span>, <span class="php-keyword1">function</span>(<span class="php-var">$newKey</span>, <span class="php-var">$oldKey</span>) <span class="php-keyword1">use</span>(&amp;<span class="php-var">$items</span>, &amp;<span class="php-var">$headersCopy</span>) {
-</span><span id="454" class="l"><a class="l" href="#454">454: </a>      <span class="php-keyword1">if</span>(<span class="php-var">$newKey</span> !== <span class="php-var">$oldKey</span>) <span class="php-comment">// No need to bother when headers are same</span>
-</span><span id="455" class="l"><a class="l" href="#455">455: </a>      {
-</span><span id="456" class="l"><a class="l" href="#456">456: </a>        <span class="php-var">$column</span> = <span class="php-keyword1">new</span> Column(<span class="php-var">$items</span>[<span class="php-var">$oldKey</span>]-&gt;all(), <span class="php-var">$newKey</span>);
-</span><span id="457" class="l"><a class="l" href="#457">457: </a>        <span class="php-var">$this</span>-&gt;forget(<span class="php-var">$oldKey</span>);
-</span><span id="458" class="l"><a class="l" href="#458">458: </a>        <span class="php-var">$this</span>-&gt;put(<span class="php-var">$newKey</span>, <span class="php-var">$column</span>);
-</span><span id="459" class="l"><a class="l" href="#459">459: </a>        <span class="php-comment">// Replace the old header from $headersCopy with the new header</span>
-</span><span id="460" class="l"><a class="l" href="#460">460: </a>        <span class="php-var">$headersCopy</span>[<span class="php-keyword2">array_search</span>(<span class="php-var">$oldKey</span>, <span class="php-var">$headersCopy</span>)] = <span class="php-var">$newKey</span>;
-</span><span id="461" class="l"><a class="l" href="#461">461: </a>      }
-</span><span id="462" class="l"><a class="l" href="#462">462: </a>    });
-</span><span id="463" class="l"><a class="l" href="#463">463: </a>    <span class="php-comment">// Order columns like they where before.</span>
-</span><span id="464" class="l"><a class="l" href="#464">464: </a>    <span class="php-var">$this</span>-&gt;orderColumns(<span class="php-var">$headersCopy</span>);
-</span><span id="465" class="l"><a class="l" href="#465">465: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
-</span><span id="466" class="l"><a class="l" href="#466">466: </a>  }
-</span><span id="467" class="l"><a class="l" href="#467">467: </a>
-</span><span id="468" class="l"><a class="l" href="#468">468: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___call" href="#___call">__call</a>(<span class="php-var">$name</span>, <span class="php-var">$args</span>)
-</span><span id="469" class="l"><a class="l" href="#469">469: </a>  {
-</span><span id="470" class="l"><a class="l" href="#470">470: </a>    <span class="php-var">$autloadedClasses</span> = <span class="php-keyword2">get_declared_classes</span>();
-</span><span id="471" class="l"><a class="l" href="#471">471: </a>
-</span><span id="472" class="l"><a class="l" href="#472">472: </a>    <span class="php-comment">// Don't bother, it seems we did what's needed before already before.</span>
-</span><span id="473" class="l"><a class="l" href="#473">473: </a>    <span class="php-keyword1">if</span>(<span class="php-keyword2">in_array</span>(<span class="php-var">$name</span>, <span class="php-keyword2">array_keys</span>(<span class="php-var">$this</span>-&gt;exts))) <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>]-&gt;make(<span class="php-var">$this</span>, <span class="php-keyword1">new</span> Config(<span class="php-var">$args</span>[<span class="php-num">0</span>]));
-</span><span id="474" class="l"><a class="l" href="#474">474: </a>
-</span><span id="475" class="l"><a class="l" href="#475">475: </a>    <span class="php-comment">/**
-</span></span><span id="476" class="l"><a class="l" href="#476">476: </a><span class="php-comment">     * Use existing class mechanism
-</span></span><span id="477" class="l"><a class="l" href="#477">477: </a><span class="php-comment">     */</span>
-</span><span id="478" class="l"><a class="l" href="#478">478: </a>    <span class="php-var">$found</span> = <span class="php-keyword1">false</span>;
-</span><span id="479" class="l"><a class="l" href="#479">479: </a>    <span class="php-comment">// Let's see if the class is loaded first.</span>
-</span><span id="480" class="l"><a class="l" href="#480">480: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$autloadedClasses</span>, <span class="php-keyword1">function</span>(<span class="php-var">$class</span>, <span class="php-var">$index</span>) <span class="php-keyword1">use</span>(<span class="php-var">$name</span>, &amp;<span class="php-var">$found</span>) {
-</span><span id="481" class="l"><a class="l" href="#481">481: </a>      <span class="php-keyword1">if</span>(<span class="php-keyword2">is_string</span>(<span class="php-var">$found</span>)) <span class="php-keyword1">return</span>;
-</span><span id="482" class="l"><a class="l" href="#482">482: </a>      <span class="php-var">$segments</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">'\\'</span>, <span class="php-var">$class</span>);
-</span><span id="483" class="l"><a class="l" href="#483">483: </a>      <span class="php-comment">// We assume the last segment of a fully-qualified-classname is equal to the</span>
-</span><span id="484" class="l"><a class="l" href="#484">484: </a>      <span class="php-comment">// entry in the array.</span>
-</span><span id="485" class="l"><a class="l" href="#485">485: </a>      <span class="php-keyword1">if</span>(last(<span class="php-var">$segments</span>) === <span class="php-var">$name</span>) <span class="php-keyword1">return</span> <span class="php-var">$found</span> = <span class="php-var">$class</span>;
-</span><span id="486" class="l"><a class="l" href="#486">486: </a>    });
-</span><span id="487" class="l"><a class="l" href="#487">487: </a>    <span class="php-comment">// Make sure it's a TablemanExtension</span>
-</span><span id="488" class="l"><a class="l" href="#488">488: </a>    <span class="php-keyword1">if</span>(<span class="php-var">$found</span> &amp;&amp; (<span class="php-var">$instance</span> = <span class="php-keyword1">new</span> <span class="php-var">$found</span>) <span class="php-keyword1">instanceof</span> TablemanExtension)
-</span><span id="489" class="l"><a class="l" href="#489">489: </a>    {
-</span><span id="490" class="l"><a class="l" href="#490">490: </a>      <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>] = <span class="php-var">$instance</span>;
-</span><span id="491" class="l"><a class="l" href="#491">491: </a>      <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>]-&gt;make(<span class="php-var">$this</span>, <span class="php-keyword1">new</span> Config(<span class="php-var">$args</span>[<span class="php-num">0</span>]));
-</span><span id="492" class="l"><a class="l" href="#492">492: </a>    } 
-</span><span id="493" class="l"><a class="l" href="#493">493: </a>
-</span><span id="494" class="l"><a class="l" href="#494">494: </a>    <span class="php-comment">/*
-</span></span><span id="495" class="l"><a class="l" href="#495">495: </a><span class="php-comment">     * Load non-existent class mechanism
-</span></span><span id="496" class="l"><a class="l" href="#496">496: </a><span class="php-comment">     */</span>
-</span><span id="497" class="l"><a class="l" href="#497">497: </a>    <span class="php-var">$ext_reg</span> = <span class="php-keyword1">require</span> <span class="php-quote">&quot;./../Config/ExtensionRegister.php&quot;</span>;
-</span><span id="498" class="l"><a class="l" href="#498">498: </a>    <span class="php-keyword1">if</span>( ! <span class="php-keyword2">in_array</span>(<span class="php-var">$name</span>, <span class="php-keyword2">array_keys</span>(<span class="php-var">$ext_reg</span>))) <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(<span class="php-quote">&quot;method </span><span class="php-var">{$name}</span><span class="php-quote"> is not a part of &quot;</span> . __CLASS__);
-</span><span id="499" class="l"><a class="l" href="#499">499: </a>    <span class="php-keyword1">require_once</span> <span class="php-var">$ext_reg</span>[<span class="php-var">$name</span>][<span class="php-quote">'relative_path'</span>];
-</span><span id="500" class="l"><a class="l" href="#500">500: </a>    <span class="php-var">$classname</span> = <span class="php-var">$ext_reg</span>[<span class="php-var">$name</span>][<span class="php-quote">'fully_qualified_classname'</span>];
-</span><span id="501" class="l"><a class="l" href="#501">501: </a>    <span class="php-var">$instance</span> = <span class="php-keyword1">new</span> <span class="php-var">$classname</span>;
-</span><span id="502" class="l"><a class="l" href="#502">502: </a>    <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>] = <span class="php-var">$instance</span>;
-</span><span id="503" class="l"><a class="l" href="#503">503: </a>    <span class="php-keyword1">if</span>( ! <span class="php-keyword1">isset</span>(<span class="php-var">$args</span>[<span class="php-num">0</span>])) <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(<span class="php-quote">&quot;you must provide a config for </span><span class="php-var">{$name}</span><span class="php-quote">&quot;</span>);
-</span><span id="504" class="l"><a class="l" href="#504">504: </a>    <span class="php-keyword1">if</span>( ! <span class="php-keyword2">is_array</span>(<span class="php-var">$args</span>[<span class="php-num">0</span>])) <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(<span class="php-quote">&quot;config for </span><span class="php-var">{$name}</span><span class="php-quote"> must be an array&quot;</span>);
-</span><span id="505" class="l"><a class="l" href="#505">505: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>]-&gt;make(<span class="php-var">$this</span>, <span class="php-keyword1">new</span> Config(<span class="php-var">$args</span>[<span class="php-num">0</span>]));
-</span><span id="506" class="l"><a class="l" href="#506">506: </a>  }
-</span><span id="507" class="l"><a class="l" href="#507">507: </a></span>}</code></pre>
+</span><span id="372" class="l"><a class="l" href="#372">372: </a>  <span class="php-comment">/**
+</span></span><span id="373" class="l"><a class="l" href="#373">373: </a><span class="php-comment">   * Get columns
+</span></span><span id="374" class="l"><a class="l" href="#374">374: </a><span class="php-comment">   * 
+</span></span><span id="375" class="l"><a class="l" href="#375">375: </a><span class="php-comment">   * @return array
+</span></span><span id="376" class="l"><a class="l" href="#376">376: </a><span class="php-comment">   */</span>
+</span><span id="377" class="l"><a class="l" href="#377">377: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getAllColumns" href="#_getAllColumns">getAllColumns</a>()
+</span><span id="378" class="l"><a class="l" href="#378">378: </a>  {
+</span><span id="379" class="l"><a class="l" href="#379">379: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;items;
+</span><span id="380" class="l"><a class="l" href="#380">380: </a>  }
+</span><span id="381" class="l"><a class="l" href="#381">381: </a>
+</span><span id="382" class="l"><a class="l" href="#382">382: </a>  <span class="php-comment">/**
+</span></span><span id="383" class="l"><a class="l" href="#383">383: </a><span class="php-comment">   * Get referenced-rows as an array
+</span></span><span id="384" class="l"><a class="l" href="#384">384: </a><span class="php-comment">   * 
+</span></span><span id="385" class="l"><a class="l" href="#385">385: </a><span class="php-comment">   * @return  array
+</span></span><span id="386" class="l"><a class="l" href="#386">386: </a><span class="php-comment">   */</span>
+</span><span id="387" class="l"><a class="l" href="#387">387: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_getRows" href="#_getRows">getRows</a>()
+</span><span id="388" class="l"><a class="l" href="#388">388: </a>  {
+</span><span id="389" class="l"><a class="l" href="#389">389: </a>    <span class="php-var">$items</span>  = &amp;<span class="php-var">$this</span>-&gt;items;
+</span><span id="390" class="l"><a class="l" href="#390">390: </a>    <span class="php-var">$mergee</span> = <span class="php-keyword1">array</span>();
+</span><span id="391" class="l"><a class="l" href="#391">391: </a>    <span class="php-var">$columnNames</span> = <span class="php-keyword2">array_keys</span>(<span class="php-var">$this</span>-&gt;items);
+</span><span id="392" class="l"><a class="l" href="#392">392: </a>    <span class="php-comment">// We assume the present data is symmetric</span>
+</span><span id="393" class="l"><a class="l" href="#393">393: </a>    <span class="php-keyword1">for</span>(<span class="php-var">$i</span> = <span class="php-num">0</span>; <span class="php-var">$i</span> &lt; <span class="php-keyword2">count</span>(<span class="php-var">$this</span>-&gt;first()); <span class="php-var">$i</span>++)
+</span><span id="394" class="l"><a class="l" href="#394">394: </a>    {
+</span><span id="395" class="l"><a class="l" href="#395">395: </a>      <span class="php-var">$row</span> = <span class="php-keyword1">array</span>();
+</span><span id="396" class="l"><a class="l" href="#396">396: </a>      <span class="php-keyword1">foreach</span>(<span class="php-var">$items</span> <span class="php-keyword1">as</span> <span class="php-var">$header</span> =&gt; &amp;<span class="php-var">$column</span>)
+</span><span id="397" class="l"><a class="l" href="#397">397: </a>      {
+</span><span id="398" class="l"><a class="l" href="#398">398: </a>        <span class="php-var">$row</span>[<span class="php-var">$header</span>] = &amp;<span class="php-var">$column</span>-&gt;items[<span class="php-var">$i</span>];
+</span><span id="399" class="l"><a class="l" href="#399">399: </a>      }
+</span><span id="400" class="l"><a class="l" href="#400">400: </a>      <span class="php-var">$mergee</span>[] = <span class="php-var">$row</span>;
+</span><span id="401" class="l"><a class="l" href="#401">401: </a>    }
+</span><span id="402" class="l"><a class="l" href="#402">402: </a>    <span class="php-keyword1">return</span> <span class="php-var">$mergee</span>;
+</span><span id="403" class="l"><a class="l" href="#403">403: </a>  }
+</span><span id="404" class="l"><a class="l" href="#404">404: </a>
+</span><span id="405" class="l"><a class="l" href="#405">405: </a>  <span class="php-comment">/**
+</span></span><span id="406" class="l"><a class="l" href="#406">406: </a><span class="php-comment">   * Rename Headers
+</span></span><span id="407" class="l"><a class="l" href="#407">407: </a><span class="php-comment">   * 
+</span></span><span id="408" class="l"><a class="l" href="#408">408: </a><span class="php-comment">   * @return void
+</span></span><span id="409" class="l"><a class="l" href="#409">409: </a><span class="php-comment">   */</span>
+</span><span id="410" class="l"><a class="l" href="#410">410: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_renameColumns" href="#_renameColumns">renameColumns</a>(<span class="php-keyword1">array</span> <span class="php-var">$headers</span> = <span class="php-keyword1">array</span>())
+</span><span id="411" class="l"><a class="l" href="#411">411: </a>  {
+</span><span id="412" class="l"><a class="l" href="#412">412: </a>    <span class="php-var">$items</span> = <span class="php-var">$this</span>-&gt;items;
+</span><span id="413" class="l"><a class="l" href="#413">413: </a>    <span class="php-comment">// We need a copy because the order will be overridden by the replace routine</span>
+</span><span id="414" class="l"><a class="l" href="#414">414: </a>    <span class="php-comment">// because in a certain situation some replacements will be skipped while still</span>
+</span><span id="415" class="l"><a class="l" href="#415">415: </a>    <span class="php-comment">// appending the other columns.</span>
+</span><span id="416" class="l"><a class="l" href="#416">416: </a>    <span class="php-var">$headersCopy</span> = <span class="php-var">$this</span>-&gt;getColumnHeaders(); 
+</span><span id="417" class="l"><a class="l" href="#417">417: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$headers</span>, <span class="php-keyword1">function</span>(<span class="php-var">$newKey</span>, <span class="php-var">$oldKey</span>) <span class="php-keyword1">use</span>(&amp;<span class="php-var">$items</span>, &amp;<span class="php-var">$headersCopy</span>) {
+</span><span id="418" class="l"><a class="l" href="#418">418: </a>      <span class="php-keyword1">if</span>(<span class="php-var">$newKey</span> !== <span class="php-var">$oldKey</span>) <span class="php-comment">// No need to bother when headers are same</span>
+</span><span id="419" class="l"><a class="l" href="#419">419: </a>      {
+</span><span id="420" class="l"><a class="l" href="#420">420: </a>        <span class="php-var">$column</span> = <span class="php-keyword1">new</span> Column(<span class="php-var">$items</span>[<span class="php-var">$oldKey</span>]-&gt;all(), <span class="php-var">$newKey</span>);
+</span><span id="421" class="l"><a class="l" href="#421">421: </a>        <span class="php-var">$this</span>-&gt;forget(<span class="php-var">$oldKey</span>);
+</span><span id="422" class="l"><a class="l" href="#422">422: </a>        <span class="php-var">$this</span>-&gt;put(<span class="php-var">$newKey</span>, <span class="php-var">$column</span>);
+</span><span id="423" class="l"><a class="l" href="#423">423: </a>        <span class="php-comment">// Replace the old header from $headersCopy with the new header</span>
+</span><span id="424" class="l"><a class="l" href="#424">424: </a>        <span class="php-var">$headersCopy</span>[<span class="php-keyword2">array_search</span>(<span class="php-var">$oldKey</span>, <span class="php-var">$headersCopy</span>)] = <span class="php-var">$newKey</span>;
+</span><span id="425" class="l"><a class="l" href="#425">425: </a>      }
+</span><span id="426" class="l"><a class="l" href="#426">426: </a>    });
+</span><span id="427" class="l"><a class="l" href="#427">427: </a>    <span class="php-comment">// Order columns like they where before.</span>
+</span><span id="428" class="l"><a class="l" href="#428">428: </a>    <span class="php-var">$this</span>-&gt;orderColumns(<span class="php-var">$headersCopy</span>);
+</span><span id="429" class="l"><a class="l" href="#429">429: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>;
+</span><span id="430" class="l"><a class="l" href="#430">430: </a>  }
+</span><span id="431" class="l"><a class="l" href="#431">431: </a>
+</span><span id="432" class="l"><a class="l" href="#432">432: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="___call" href="#___call">__call</a>(<span class="php-var">$name</span>, <span class="php-var">$args</span>)
+</span><span id="433" class="l"><a class="l" href="#433">433: </a>  {
+</span><span id="434" class="l"><a class="l" href="#434">434: </a>    <span class="php-var">$autloadedClasses</span> = <span class="php-keyword2">get_declared_classes</span>();
+</span><span id="435" class="l"><a class="l" href="#435">435: </a>
+</span><span id="436" class="l"><a class="l" href="#436">436: </a>    <span class="php-comment">// Don't bother, it seems we did what's needed before already before.</span>
+</span><span id="437" class="l"><a class="l" href="#437">437: </a>    <span class="php-keyword1">if</span>(<span class="php-keyword2">in_array</span>(<span class="php-var">$name</span>, <span class="php-keyword2">array_keys</span>(<span class="php-var">$this</span>-&gt;exts))) <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>]-&gt;make(<span class="php-var">$this</span>, <span class="php-keyword1">new</span> Config(<span class="php-var">$args</span>[<span class="php-num">0</span>]));
+</span><span id="438" class="l"><a class="l" href="#438">438: </a>
+</span><span id="439" class="l"><a class="l" href="#439">439: </a>    <span class="php-comment">/**
+</span></span><span id="440" class="l"><a class="l" href="#440">440: </a><span class="php-comment">     * Use existing class mechanism
+</span></span><span id="441" class="l"><a class="l" href="#441">441: </a><span class="php-comment">     */</span>
+</span><span id="442" class="l"><a class="l" href="#442">442: </a>    <span class="php-var">$found</span> = <span class="php-keyword1">false</span>;
+</span><span id="443" class="l"><a class="l" href="#443">443: </a>    <span class="php-comment">// Let's see if the class is loaded first.</span>
+</span><span id="444" class="l"><a class="l" href="#444">444: </a>    <span class="php-keyword2">array_walk</span>(<span class="php-var">$autloadedClasses</span>, <span class="php-keyword1">function</span>(<span class="php-var">$class</span>, <span class="php-var">$index</span>) <span class="php-keyword1">use</span>(<span class="php-var">$name</span>, &amp;<span class="php-var">$found</span>) {
+</span><span id="445" class="l"><a class="l" href="#445">445: </a>      <span class="php-keyword1">if</span>(<span class="php-keyword2">is_string</span>(<span class="php-var">$found</span>)) <span class="php-keyword1">return</span>;
+</span><span id="446" class="l"><a class="l" href="#446">446: </a>      <span class="php-var">$segments</span> = <span class="php-keyword2">explode</span>(<span class="php-quote">'\\'</span>, <span class="php-var">$class</span>);
+</span><span id="447" class="l"><a class="l" href="#447">447: </a>      <span class="php-comment">// We assume the last segment of a fully-qualified-classname is equal to the</span>
+</span><span id="448" class="l"><a class="l" href="#448">448: </a>      <span class="php-comment">// entry in the array.</span>
+</span><span id="449" class="l"><a class="l" href="#449">449: </a>      <span class="php-keyword1">if</span>(last(<span class="php-var">$segments</span>) === <span class="php-var">$name</span>) <span class="php-keyword1">return</span> <span class="php-var">$found</span> = <span class="php-var">$class</span>;
+</span><span id="450" class="l"><a class="l" href="#450">450: </a>    });
+</span><span id="451" class="l"><a class="l" href="#451">451: </a>    <span class="php-comment">// Make sure it's a TablemanExtension</span>
+</span><span id="452" class="l"><a class="l" href="#452">452: </a>    <span class="php-keyword1">if</span>(<span class="php-var">$found</span> &amp;&amp; (<span class="php-var">$instance</span> = <span class="php-keyword1">new</span> <span class="php-var">$found</span>) <span class="php-keyword1">instanceof</span> TablemanExtension)
+</span><span id="453" class="l"><a class="l" href="#453">453: </a>    {
+</span><span id="454" class="l"><a class="l" href="#454">454: </a>      <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>] = <span class="php-var">$instance</span>;
+</span><span id="455" class="l"><a class="l" href="#455">455: </a>      <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>]-&gt;make(<span class="php-var">$this</span>, <span class="php-keyword1">new</span> Config(<span class="php-var">$args</span>[<span class="php-num">0</span>]));
+</span><span id="456" class="l"><a class="l" href="#456">456: </a>    } 
+</span><span id="457" class="l"><a class="l" href="#457">457: </a>
+</span><span id="458" class="l"><a class="l" href="#458">458: </a>    <span class="php-comment">/*
+</span></span><span id="459" class="l"><a class="l" href="#459">459: </a><span class="php-comment">     * Load non-existent class mechanism
+</span></span><span id="460" class="l"><a class="l" href="#460">460: </a><span class="php-comment">     */</span>
+</span><span id="461" class="l"><a class="l" href="#461">461: </a>    <span class="php-var">$ext_reg</span> = <span class="php-keyword1">require</span> <span class="php-quote">&quot;/../Config/ExtensionRegister.php&quot;</span>;
+</span><span id="462" class="l"><a class="l" href="#462">462: </a>    <span class="php-keyword1">if</span>( ! <span class="php-keyword2">in_array</span>(<span class="php-var">$name</span>, <span class="php-keyword2">array_keys</span>(<span class="php-var">$ext_reg</span>))) <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(<span class="php-quote">&quot;method </span><span class="php-var">{$name}</span><span class="php-quote"> is not a part of &quot;</span> . __CLASS__);
+</span><span id="463" class="l"><a class="l" href="#463">463: </a>    <span class="php-keyword1">require_once</span> <span class="php-var">$ext_reg</span>[<span class="php-var">$name</span>][<span class="php-quote">'relative_path'</span>];
+</span><span id="464" class="l"><a class="l" href="#464">464: </a>    <span class="php-var">$classname</span> = <span class="php-var">$ext_reg</span>[<span class="php-var">$name</span>][<span class="php-quote">'fully_qualified_classname'</span>];
+</span><span id="465" class="l"><a class="l" href="#465">465: </a>    <span class="php-var">$instance</span> = <span class="php-keyword1">new</span> <span class="php-var">$classname</span>;
+</span><span id="466" class="l"><a class="l" href="#466">466: </a>    <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>] = <span class="php-var">$instance</span>;
+</span><span id="467" class="l"><a class="l" href="#467">467: </a>    <span class="php-keyword1">if</span>( ! <span class="php-keyword1">isset</span>(<span class="php-var">$args</span>[<span class="php-num">0</span>])) <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(<span class="php-quote">&quot;you must provide a config for </span><span class="php-var">{$name}</span><span class="php-quote">&quot;</span>);
+</span><span id="468" class="l"><a class="l" href="#468">468: </a>    <span class="php-keyword1">if</span>( ! <span class="php-keyword2">is_array</span>(<span class="php-var">$args</span>[<span class="php-num">0</span>])) <span class="php-keyword1">throw</span> <span class="php-keyword1">new</span> \Exception(<span class="php-quote">&quot;config for </span><span class="php-var">{$name}</span><span class="php-quote"> must be an array&quot;</span>);
+</span><span id="469" class="l"><a class="l" href="#469">469: </a>    <span class="php-keyword1">return</span> <span class="php-var">$this</span>-&gt;exts[<span class="php-var">$name</span>]-&gt;make(<span class="php-var">$this</span>, <span class="php-keyword1">new</span> Config(<span class="php-var">$args</span>[<span class="php-num">0</span>]));
+</span><span id="470" class="l"><a class="l" href="#470">470: </a>  }
+</span><span id="471" class="l"><a class="l" href="#471">471: </a></span>}</code></pre>
 
 	<div id="footer">
 		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
