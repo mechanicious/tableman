@@ -365,4 +365,171 @@ class Tests extends \PHPUnit_Framework_TestCase
               </tbody>
         </table>'));
   } 
+
+  public function testTablemanWithdraw()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertEquals($tableman->withdraw(function() {
+      return 'withdraw string';
+    }), 'withdraw string');
+  }
+
+  public function testSortColumns()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->sortColumns(function($current, $previous) { 
+      if(strpos($current, 'a') !== false && strpos($previous, 'a') !== false) return 0;
+      // Such that a is inferior
+      return strpos($current, 'a') !== false && strpos($previous, 'a') === false ? 1 : -1; 
+    });
+
+    $this->assertEquals($tableman->getColumnHeaders(), array('hobby', 'age', 'name', 'id'));
+  }
+
+  public function testReverseColumnOrder()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->reverse();
+    $this->assertEquals($tableman->getColumnHeaders(), array('hobby', 'age', 'name', 'id'));
+  }
+
+  public function testGetColumnHeaders()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertEquals($tableman->getColumnHeaders(), array('id', 'name', 'age', 'hobby'));
+  }
+
+  public function testColumnExists()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertEquals($tableman->columnExists('test'), false);
+    $this->assertEquals($tableman->columnExists('id'), true);
+  }  
+
+  public function testColumnHas()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertEquals($tableman->columnHas('name', 'Tony'), true);
+    $this->assertEquals($tableman->columnHas('age', '99'), false);
+  }
+
+  public function testPadData()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->padData(new Column(array(true, true, false), 'is_human'));
+    // Since the mockData['names'] was only 2 row large and we aligned the columns with 3 row large column
+    // now or name column should be prefilled to 3 rows with null
+    $this->assertEquals($tableman->get('name')->toArray(), array('Joe', 'Tony', null));
+  }
+
+  public function testPrependColumn()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->prependColumn(new Column(array(true, true, false), 'is_human'));
+    $this->assertEquals($tableman->getColumnHeaders()[0], 'is_human');
+  }
+
+  public function testAppendColumn()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->appendColumn(new Column(array(true, true, false), 'is_human'));
+    $this->assertEquals(array_reverse($tableman->getColumnHeaders())[0], 'is_human');
+  }
+
+  public function testPopColumn()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->popColumn();
+    $this->assertFalse(in_array('hobby', $tableman->getColumnHeaders()));
+  }
+
+  public function testShiftColumn()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->shiftColumn();
+    $this->assertFalse(in_array('id', $tableman->getColumnHeaders()));
+  }
+
+  public function testRemoveColumn()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->removeColumn('name');
+    $this->assertFalse(in_array('name', $tableman->getColumnHeaders()));
+  }
+
+  public function testCompareColumnContent()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertFalse($tableman->compareColumnContent($tableman->get('name'), $tableman->get('id')));
+    // Although the column headers change the content should stay the same
+    $this->assertTrue($tableman->compareColumnContent($tableman->get('name'), new Column(array('Joe', 'Tony'), 'coolnames')));
+  }
+
+  public function testReplaceColumn()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->replaceColumn(new Column(array('old', 'young'), 'approx_age'), 'age');
+    $this->assertEquals($tableman->get('age'), null);
+    $this->assertEquals($tableman->get('approx_age')->first(), 'old');
+  }
+
+  public function testEachRowOf()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->eachRowOf('age', function(&$ref, &$age, $rowIndex) {
+      $age = 'oops?';
+    });
+    $this->assertEquals($tableman->get('age')->first(), 'oops?');
+    $this->assertFalse($tableman->get('name')->first() === 'oops?');
+  }
+
+  public function testEachCell()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $tableman->eachCell(function(&$ref, &$cell, &$row, $rowIndex) {
+      if($cell === $row['age']) return $cell = 100;
+      $cell = 1;
+    });
+    $this->assertTrue($tableman->get('age')->first() === 100);
+    $this->assertTrue($tableman->get('name')->first() === 1);
+  }
+
+  public function testGetColumn()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertEquals($tableman->getColumn('name')->first(), 'Joe');
+  }
+
+  public function testGetAllColumns()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertEquals($tableman->getAllColumns()['id']->last(), 2);
+    $this->assertEquals(count($tableman->getAllColumns()), 4);
+    $this->assertTrue($tableman->getAllColumns()['id'] instanceof \mechanicious\Columnizer\Column);
+  }
+
+  public function testGetRows()
+  {
+    $columnBag = with(new \mechanicious\Columnizer\Columnizer($this->mockData))->columnizeRowArray();
+    $tableman = new \mechanicious\Tableman\Tableman($columnBag);
+    $this->assertEquals($tableman->getRows()[1]['name'], 'Tony');
+  }
 }

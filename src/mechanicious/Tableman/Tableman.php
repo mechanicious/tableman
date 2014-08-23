@@ -66,6 +66,8 @@ class Tableman extends Collection
    * Sort columns with a callback function
    * 
    * @param  closure $callback
+   * @callback function($previous, $current) {// -1, 0, 1}
+   * @usage http://php.net/manual/en/function.uasort.php#refsect1-function.uasort-parameters
    * @return mechanicious\Tableman\Tableman;
    */
   public function sortColumns(\closure $callback)
@@ -79,7 +81,18 @@ class Tableman extends Collection
    *  
    * @return mechanicious\Tableman\Tableman;
    */
-  public function reverseColumnOrder()
+  public function reverse()
+  {
+    $this->items = array_reverse($this->items);
+    return $this;
+  }
+
+  /**
+   * Reverse the order of columns, alias of Tableman::reverse
+   *  
+   * @return mechanicious\Tableman\Tableman;
+   */
+  public function reverseColumns()
   {
     $this->reverse();
     return $this;
@@ -154,7 +167,7 @@ class Tableman extends Collection
    */
   public function columnHas($header, $needle)
   {
-    return in_array($needle, $this->items[$header]);
+    return in_array($needle, $this->items[$header]->toArray());
   }
 
   /**
@@ -209,7 +222,10 @@ class Tableman extends Collection
    */
   public function prependColumn(Column $col)
   {
-    $this->prepend($this->padData($col));
+    $this->items[$col->getHeader()] = $this->padData($col);
+    $order = $this->getColumnHeaders();
+    array_unshift($order, $col->getHeader());
+    $this->orderColumns($order);
     return $this;
   }
 
@@ -221,7 +237,7 @@ class Tableman extends Collection
    */
   public function appendColumn(Column $col)
   {
-    $this->push($this->padData($col));
+    $this->items[$col->getHeader()] = $this->padData($col);
     return $this;
   }
 
@@ -231,7 +247,7 @@ class Tableman extends Collection
    * @param  string $header
    * @return mechanicious\Tableman\Tableman
    */
-  public function popColumn($header)
+  public function popColumn()
   {
     $this->pop();
     return $this;
@@ -243,7 +259,7 @@ class Tableman extends Collection
    * @param  string $header
    * @return mechanicious\Tableman\Tableman
    */
-  public function shiftColumn($header)
+  public function shiftColumn()
   {
     $this->shift();
     return $this;
@@ -300,7 +316,7 @@ class Tableman extends Collection
    * @callback  function(&$ref, &$row, $rowIndex) {}
    * @return    mechanicious\Tableman\Tableman
    */
-  public function eachRowOf(\closure $callback, $header)
+  public function eachRowOf($header, \closure $callback)
   {
     array_walk($this->items[$header]->items, function(&$row, $rowIndex) use($callback)
     {
@@ -329,15 +345,15 @@ class Tableman extends Collection
    * Apply a callback on each cell
    * 
    * @param     closure $callback
-   * @callback  function(&$ref, &$cell, &$cellColumn, $columnHeader, &$row, $rowIndex) {}
+   * @callback  function(&$ref, &$cell, &$row, $rowIndex) {}
    * @return    mechanicious\Tableman\Tableman
    */
-  public function eachCell(closure $callback) 
+  public function eachCell(\closure $callback) 
   {
-    array_walk($this->getRows(), function(&$row, &$rowIndex) use(&$rows, $callback) {
-      foreach($row as $cellColumn => &$cell)
+    array_walk($this->getRows(), function(&$row, $rowIndex) use(&$rows, $callback) {
+      foreach($row as $index => &$cell)
       {
-        $callback($this, $cell, $cellColumn, $cellColumn->getHeader(), $row, $rowIndex);
+        $callback($this, $cell, $row, $rowIndex);
       }
     });
     return $this;
