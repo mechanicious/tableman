@@ -71,10 +71,18 @@ $data = array(
 );
 $columnizer = new Columnizer($data); // Data converversion
 $tableman   = new Tableman($columnizer->columnizeRowArray()); // Data modeling
+
 // Custom filters
 $tableman->eachRow(function(&$_this, &row, $index) { 
     if($row['id'] === 1) unset($row);
 })
-echo $tableman->Bs3Table(new Config(array('config'=>array(), 'header'=> array(), 'extra_classes'=>array())); // Custom extensions
+
+// Custom extensions
+$tableman->Bs3Table(new Config(array(
+ // Plugin-like Configuration
+ 'config'=>array(), 
+ 'header'=> array(), 
+ 'extra_classes'=>array()
+)); 
 ```
 
