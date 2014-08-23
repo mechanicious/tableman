@@ -69,108 +69,12 @@ $data = array(
         'age'   => 27
     ),
 );
-
-$tableman  = new Tableman($data);
-$tableman->getHtml(); // (string) HTML markup for the table
-
+$columnizer = new Columnizer($data); // Data converversion
+$tableman   = new Tableman($columnizer->columnizeRowArray()); // Data modeling
 // Custom filters
-$tableman->eachRow(function(&$rowIndex, &$row) {
-    if($row['id'] === 1) unset($row); // remove user with id eq to 1 from the table!
+$tableman->eachRow(function(&$_this, &row, $index) { 
+    if($row['id'] === 1) unset($row);
 })
-->getHtml();
-```
-
-## Tableman API (human friendly)
-You'll find a bit of explanation about the methods underneath.
-
-#### mechanicious\Tableman::eachRow($callback)
-Allows you to loop through the rows filter things out and apply changes.
-
-#####$callback (closure)
-```php
-$callback = function(&$hook, &$row, &$rowIndex) {};
-```
-* **$hook (mechanicious\Tableman\Tableman)**
-Reference to the main object. Note: `Illuminate\Support\Collection` API is in the reach of your hand. Thanks to the `$hook` variable you don't need an external variable outside the filter function.
-```php
-$hook->all();
-```
-* **$row (array)**
-Array with cells, each cell carries a column-header(key) of the column to which it belongs and cell-data(value)
-```php
-// Example
-array('id' => 1, 'name' => 'Tony', 'age' => 27);
-```
-* **$rowIndex (int)**
-Row number.
-```php
-if($rowIndex % 2 !== 0) unset($row);
-```
-
-####Example mechanicious\Tableman::eachRow($callback)
-```php
-$columnBag = with(new \mechanicious\Columnizer\Columnizer($someData = array(
-   array(
-       'id'    => 1,
-       'name'  => 'Joe',
-       'age'   => 25
-   ),
-   array(
-       'id'    => 2,
-       'name'  => 'Tony',
-       'age'   => 27,
-       'hobby' => 'sport',
-   ))))
-   ->columnize();
-
-$tableman = new \mechanicious\Tableman\Tableman($columnBag);
-$tableman->eachRow(function(&$ref, &$row, $rowIndex) {
-	// If you actually want to make changes then make sure
-	// you **reference** items.
-	foreach($row as $columnHeader => &$cell)
-	{
-		// Append an ellipsis at the very end of every cell.
-		$cell .= "...";
-	}
-});
-
-// To JSON 
-// Two formats are available column-format, and row-format. Row-format is the one you get from a DB-Query.
-$tableman->toJson($format = "column");
-//{
-//	"id":["1...","2..."],
-//	"name":["Joe...","Tony..."],
-//	"age":["25...", "27..."],
-//	"hobby":["...","sport..."]
-//}
-
-```
-
-#### mechanicious\Tableman::addColumn($col, $position = 3)
-Allows you to loop through the rows filter things out and apply changes.
-
-#####$col (mechanicious\Columnizer\Column)
-Column to add.
-
-#####$position (int)
-Offset to add the column at.
-
-
-####Example mechanicious\Tableman::eachRow($callback)
-```php
-$tableman->addColumn(new Column($anyData = array(true, false, true), 'registered'), 3);
-
-```
-
-#### mechanicious\Columnizer\Column::chop($amount)
-Remove a certain amount of items from the end of a column.
-
-#####amount (int)
-Offset to add the column at.
-
-####Example mechanicious\Columnizer\Column::chop($amount)
-```php
-$column->chop($amount = 3);
-
+echo $tableman->Bs3Table(new Config(array('config'=>array(), 'header'=> array(), 'extra_classes'=>array())); // Custom extensions
 ```
 
