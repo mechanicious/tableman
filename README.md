@@ -6,6 +6,8 @@
   * [Tableman Modularity](https://github.com/mechanicious/tableman#tableman-modularity)
   * [What's included](https://github.com/mechanicious/tableman#whats-included)
   * [Tableman usecases](https://github.com/mechanicious/tableman#tableman-usecases)
+  * Wiki
+    * [Data Modeling Inside of Tableman](https://github.com/mechanicious/tableman/wiki/Data-Modeling-Inside-Tableman) 
 
 ## Tableman
 
