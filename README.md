@@ -69,7 +69,7 @@ $data = array(
         'age'   => 27
     ),
 );
-$columnizer = new Columnizer($data); // Data converersion
+$columnizer = new Columnizer($data); // Data conversion
 $tableman   = new Tableman($columnizer->columnizeRowArray()); // Data modeling
 
 // Custom filters
@@ -85,4 +85,3 @@ $tableman->Bs3Table(new Config(array(
  'extra_classes'=>array()
 )); 
 ```
-
