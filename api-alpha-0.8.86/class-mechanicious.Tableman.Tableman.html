@@ -1,0 +1,1432 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta name="generator" content="ApiGen 2.8.0" />
+
+	<title>Class mechanicious\Tableman\Tableman</title>
+
+	<script type="text/javascript" src="resources/combined.js?3336982557"></script>
+	<script type="text/javascript" src="elementlist.js?3092150233"></script>
+	<link rel="stylesheet" type="text/css" media="all" href="resources/style.css?3505392360" />
+
+</head>
+
+<body>
+<div id="left">
+	<div id="menu">
+		<a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+		<div id="groups">
+			<h3>Namespaces</h3>
+			<ul>
+				<li class="active"><a href="namespace-mechanicious.html">mechanicious<span></span></a>
+						<ul>
+				<li><a href="namespace-mechanicious.Columnizer.html">Columnizer</a>
+						</li>
+				<li><a href="namespace-mechanicious.Extensions.html">Extensions<span></span></a>
+						<ul>
+				<li><a href="namespace-mechanicious.Extensions.Bs3Table.html">Bs3Table</a>
+						</li>
+							</ul></li>
+				<li><a href="namespace-mechanicious.Support.html">Support</a>
+						</li>
+				<li class="active"><a href="namespace-mechanicious.Tableman.html">Tableman</a>
+						</li>
+				<li><a href="namespace-mechanicious.TablemanExtension.html">TablemanExtension</a>
+						</li>
+				<li><a href="namespace-mechanicious.Test.html">Test<span></span></a>
+						<ul>
+				<li><a href="namespace-mechanicious.Test.Tableman.html">Tableman</a>
+						</li>
+							</ul></li></ul></li>
+				<li><a href="namespace-PHP.html">PHP</a>
+						</li>
+			</ul>
+		</div>
+
+		<hr />
+
+
+		<div id="elements">
+			<h3>Classes</h3>
+			<ul>
+				<li class="active"><a href="class-mechanicious.Tableman.Tableman.html">Tableman</a></li>
+				<li><a href="class-mechanicious.Tableman.TablemanCollection.html">TablemanCollection</a></li>
+			</ul>
+
+
+
+
+
+		</div>
+	</div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+	<form id="search">
+		<input type="hidden" name="cx" value="" />
+		<input type="hidden" name="ie" value="UTF-8" />
+		<input type="text" name="q" class="text" />
+		<input type="submit" value="Search" />
+	</form>
+
+	<div id="navigation">
+		<ul>
+			<li>
+				<a href="index.html" title="Overview"><span>Overview</span></a>
+			</li>
+			<li>
+				<a href="namespace-mechanicious.Tableman.html" title="Summary of mechanicious\Tableman"><span>Namespace</span></a>
+			</li>
+			<li class="active">
+<span>Class</span>			</li>
+		</ul>
+		<ul>
+			<li>
+				<a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+			</li>
+		</ul>
+		<ul>
+		</ul>
+	</div>
+
+<div id="content" class="class">
+	<h1>Class Tableman</h1>
+
+
+	<div class="description">
+	
+<p>Tableman Provides a convenient API for manipulation and creation of
+tables.</p>
+
+	</div>
+
+	<dl class="tree">
+		<dd style="padding-left:0px">
+Illuminate\Support\Collection
+			
+			
+		</dd>
+		<dd style="padding-left:30px">
+			<img src="resources/inherit.png" alt="Extended by" />
+			<a href="class-mechanicious.Tableman.TablemanCollection.html"><span>mechanicious\Tableman\TablemanCollection</span></a>
+			
+			
+			
+		</dd>
+		<dd style="padding-left:60px">
+			<img src="resources/inherit.png" alt="Extended by" />
+<b><span>mechanicious\Tableman\Tableman</span></b>			
+			
+			 uses 
+				<a href="class-mechanicious.Support.ArrayableTrait.html"><span>mechanicious\Support\ArrayableTrait</span></a>
+			
+		</dd>
+	</dl>
+
+
+
+
+
+
+
+
+	<div class="info">
+		
+		
+		<b>Namespace:</b> <a href="namespace-mechanicious.html">mechanicious</a>\<a href="namespace-mechanicious.Tableman.html">Tableman</a><br />
+		
+
+		<b>Located at</b> <a href="source-class-mechanicious.Tableman.Tableman.html#10-489" title="Go to source code">mechanicious/Tableman/Tableman.php</a><br />
+	</div>
+
+
+
+	<table class="summary" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="__construct" id="___construct">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___construct">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#25-28" title="Go to source code">__construct</a>( <span><code><a href="class-mechanicious.Columnizer.ColumnBag.html">mechanicious\Columnizer\ColumnBag</a></code> <var>$cols</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getJson" id="_getJson">
+
+		<td class="attributes"><code>
+			 public 
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getJson">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#30-47" title="Go to source code">getJson</a>( <span>mixed <var>$format</var> = <span class="php-quote">'column'</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Get JSON representation of the data</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get JSON representation of the data</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>string</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="withdraw" id="_withdraw">
+
+		<td class="attributes"><code>
+			 public 
+			mixed
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_withdraw">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#56-65" title="Go to source code">withdraw</a>( <span>closure <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Returns whatever the callback function returns</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Returns whatever the callback function returns</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$callback</var></dt>
+					<dd><code>closure</code><br>$callback</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mixed</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="sortColumns" id="_sortColumns">
+
+		<td class="attributes"><code>
+			 public 
+			mechanicious\Tableman\Tableman;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_sortColumns">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#67-79" title="Go to source code">sortColumns</a>( <span>closure <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Sort columns with a callback function</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Sort columns with a callback function</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$callback</var></dt>
+					<dd><code>closure</code><br>$callback</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mechanicious\Tableman\Tableman;</code><br />
+				</div>
+
+
+				<h4>Callback</h4>
+				<div class="list">
+						function($previous, $current) {// -1, 0, 1}<br />
+				</div>
+				<h4>Usage</h4>
+				<div class="list">
+						<a
+href="http://php.net/manual/en/function.uasort.php#refsect1-function.uasort-parameters">http://php.net/manual/en/function.uasort.php#refsect1-function.uasort-parameters</a><br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reverse" id="_reverse">
+
+		<td class="attributes"><code>
+			 public 
+			mechanicious\Tableman\Tableman;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reverse">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#81-90" title="Go to source code">reverse</a>( )</code>
+
+		<div class="description short">
+			
+<p>Reverse the order of columns</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Reverse the order of columns</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mechanicious\Tableman\Tableman;</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="reverseColumns" id="_reverseColumns">
+
+		<td class="attributes"><code>
+			 public 
+			mechanicious\Tableman\Tableman;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_reverseColumns">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#92-101" title="Go to source code">reverseColumns</a>( )</code>
+
+		<div class="description short">
+			
+<p>Reverse the order of columns, alias of Tableman::reverse</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Reverse the order of columns, alias of Tableman::reverse</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mechanicious\Tableman\Tableman;</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="orderColumns" id="_orderColumns">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_orderColumns">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#103-121" title="Go to source code">orderColumns</a>( <span>array <var>$order</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Put columns into a desired order</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Put columns into a desired order</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getColumns" id="_getColumns">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getColumns">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#123-131" title="Go to source code">getColumns</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get the columns</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get the columns</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getColumnOrder" id="_getColumnOrder">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getColumnOrder">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#133-141" title="Go to source code">getColumnOrder</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get order of columns</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get order of columns</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getColumnHeaders" id="_getColumnHeaders">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getColumnHeaders">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#143-151" title="Go to source code">getColumnHeaders</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get current headers of columns</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get current headers of columns</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="columnExists" id="_columnExists">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_columnExists">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#153-161" title="Go to source code">columnExists</a>( <span>mixed <var>$header</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if a column exists</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if a column exists</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="columnHas" id="_columnHas">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_columnHas">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#163-173" title="Go to source code">columnHas</a>( <span>string <var>$header</var></span>, <span>mixed <var>$needle</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if a certain column has a certain value</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if a certain column has a certain value</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br>$header</dd>
+					<dt><var>$needle</var></dt>
+					<dd><code>mixed</code><br>$needle</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="addColumn" id="_addColumn">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_addColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#175-195" title="Go to source code">addColumn</a>( <span><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code> <var>$col</var></span>, <span>integer <var>$offset</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Add column at a particular offset</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Add column at a particular offset</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$col</var></dt>
+					<dd><code><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code></code><br>$col</dd>
+					<dt><var>$offset</var></dt>
+					<dd><code>integer</code><br>$offset</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="padData" id="_padData">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_padData">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#197-217" title="Go to source code">padData</a>( <span><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code> <var>$col</var></span>, <span>mixed <var>$padValue</var> = <span class="php-keyword1">null</span></span> )</code>
+
+		<div class="description short">
+			
+<p>Symmetrize data if the given column is asymmetric</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Symmetrize data if the given column is asymmetric</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$col</var></dt>
+					<dd><code><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code></code><br>$col</dd>
+					<dt><var>$padValue</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="prependColumn" id="_prependColumn">
+
+		<td class="attributes"><code>
+			 public 
+			mechanicious\Tableman\Tableman;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_prependColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#219-232" title="Go to source code">prependColumn</a>( <span><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code> <var>$col</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Prepend column</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Prepend column</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$col</var></dt>
+					<dd><code><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code></code><br>$col</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mechanicious\Tableman\Tableman;</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="appendColumn" id="_appendColumn">
+
+		<td class="attributes"><code>
+			 public 
+			mechanicious\Tableman\Tableman;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_appendColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#234-244" title="Go to source code">appendColumn</a>( <span><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code> <var>$col</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Append column</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Append column</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$col</var></dt>
+					<dd><code><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code></code><br>$col</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mechanicious\Tableman\Tableman;</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="popColumn" id="_popColumn">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_popColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#246-256" title="Go to source code">popColumn</a>( )</code>
+
+		<div class="description short">
+			
+<p>Remove the last column</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove the last column</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="shiftColumn" id="_shiftColumn">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_shiftColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#258-268" title="Go to source code">shiftColumn</a>( )</code>
+
+		<div class="description short">
+			
+<p>Remove first column</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove first column</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="removeColumn" id="_removeColumn">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_removeColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#270-280" title="Go to source code">removeColumn</a>( <span>string <var>$header</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Remove a column the header</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Remove a column the header</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br>$header</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code></code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="compareColumnContent" id="_compareColumnContent">
+
+		<td class="attributes"><code>
+			 public 
+			boolean
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_compareColumnContent">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#282-292" title="Go to source code">compareColumnContent</a>( <span>string <var>$colA</var></span>, <span>string <var>$colB</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Check if tho columns carry same content</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Check if tho columns carry same content</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$colA</var></dt>
+					<dd><code>string</code><br>$a</dd>
+					<dt><var>$colB</var></dt>
+					<dd><code>string</code><br>$b</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>boolean</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="replaceColumn" id="_replaceColumn">
+
+		<td class="attributes"><code>
+			 public 
+			mechanicious\Tableman\Tableman;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_replaceColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#294-312" title="Go to source code">replaceColumn</a>( <span><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code> <var>$col</var></span>, <span>string <var>$header</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Replace column by another column</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Replace column by another column</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$col</var></dt>
+					<dd><code><code><a href="class-mechanicious.Columnizer.Column.html">mechanicious\Columnizer\Column</a></code></code><br>$col</dd>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br>$header</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mechanicious\Tableman\Tableman;</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="eachRowOf" id="_eachRowOf">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_eachRowOf">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#314-328" title="Go to source code">eachRowOf</a>( <span>closure <var>$header</var></span>, <span>closure <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Apply a callback on each row belonging to a specified column</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Apply a callback on each row belonging to a specified column</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><code>closure</code><br>$callback</dd>
+					<dt><var>$callback</var></dt>
+					<dd></dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code></code><br />
+				</div>
+
+
+				<h4>Callback</h4>
+				<div class="list">
+						function(&amp;$ref, &amp;$row, $rowIndex) {}<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="eachRow" id="_eachRow">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_eachRow">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#330-344" title="Go to source code">eachRow</a>( <span>closure <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Apply a callback on each row</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Apply a callback on each row</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$callback</var></dt>
+					<dd><code>closure</code><br>$callback</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code></code><br />
+				</div>
+
+
+				<h4>Callback</h4>
+				<div class="list">
+						function(&amp;$ref, &amp;$row, $rowIndex) {}<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="eachCell" id="_eachCell">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_eachCell">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#346-362" title="Go to source code">eachCell</a>( <span>closure <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Apply a callback on each cell</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Apply a callback on each cell</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$callback</var></dt>
+					<dd><code>closure</code><br>$callback</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code></code><br />
+				</div>
+
+
+				<h4>Callback</h4>
+				<div class="list">
+						function(&amp;$ref, &amp;$cell, &amp;$row, $rowIndex) {}<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="eachColumn" id="_eachColumn">
+
+		<td class="attributes"><code>
+			 public 
+			<code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code>
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_eachColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#364-377" title="Go to source code">eachColumn</a>( <span>closure <var>$callback</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Apply a callback on each column</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Apply a callback on each column</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$callback</var></dt>
+					<dd><code>closure</code><br>$callback</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code><code><a href="class-mechanicious.Tableman.Tableman.html">mechanicious\Tableman\Tableman</a></code></code><br />
+				</div>
+
+
+				<h4>Callback</h4>
+				<div class="list">
+						function(&amp;$ref, &amp;$column, $header) {}<br />
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getColumn" id="_getColumn">
+
+		<td class="attributes"><code>
+			 public 
+			mechanicious\Columnizer\Column;
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getColumn">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#379-388" title="Go to source code">getColumn</a>( <span>string <var>$header</var></span> )</code>
+
+		<div class="description short">
+			
+<p>Get a column by it's header</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get a column by it's header</p>
+
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$header</var></dt>
+					<dd><code>string</code><br>$header</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>mechanicious\Columnizer\Column;</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getAllColumns" id="_getAllColumns">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getAllColumns">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#390-398" title="Go to source code">getAllColumns</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get columns</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get columns</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getRows" id="_getRows">
+
+		<td class="attributes"><code>
+			 public 
+			array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getRows">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#400-421" title="Go to source code">getRows</a>( )</code>
+
+		<div class="description short">
+			
+<p>Get referenced-rows as an array</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Get referenced-rows as an array</p>
+
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					<code>array</code><br />
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="renameColumns" id="_renameColumns">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_renameColumns">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#423-448" title="Go to source code">renameColumns</a>( <span>array <var>$headers</var> = <span class="php-keyword1">array</span>()</span> )</code>
+
+		<div class="description short">
+			
+<p>Rename Headers</p>
+
+		</div>
+
+		<div class="description detailed hidden">
+			
+<p>Rename Headers</p>
+
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="__call" id="___call">
+
+		<td class="attributes"><code>
+			 public 
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#___call">#</a>
+		<code><a href="source-class-mechanicious.Tableman.Tableman.html#450-488" title="Go to source code">__call</a>( <span>mixed <var>$name</var></span>, <span>mixed <var>$args</var></span> )</code>
+
+		<div class="description short">
+			
+		</div>
+
+		<div class="description detailed hidden">
+			
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+	<table class="summary inherited">
+	<caption>Methods inherited from <a href="class-mechanicious.Tableman.TablemanCollection.html#methods">mechanicious\Tableman\TablemanCollection</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_collapse">collapse()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_diff">diff()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_each">each()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_fetch">fetch()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_filter">filter()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_flatten">flatten()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_getArrayableItems">getArrayableItems()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_groupBy">groupBy()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_implode">implode()</a>, 
+			<a href="class-mechanicious.Tableman.TablemanCollection.html#_make">make()</a>
+		</code></td>
+	</tr>
+	</table>
+
+	<table class="summary used">
+	<caption>Methods used from <a href="class-mechanicious.Support.ArrayableTrait.html#methods">mechanicious\Support\ArrayableTrait</a></caption>
+	<tr>
+		<td><code>
+			<a href="class-mechanicious.Support.ArrayableTrait.html#_array_diff_recursive">()</a>
+		</code></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+	<table class="summary" id="properties">
+	<caption>Properties summary</caption>
+	<tr data-order="exts" id="$exts">
+		<td class="attributes"><code>
+			protected  
+			array
+		</code></td>
+
+		<td class="name">
+				<a href="source-class-mechanicious.Tableman.Tableman.html#19-23" title="Go to source code"><var>$exts</var></a>
+		</td>
+		<td class="value"><code><span class="php-keyword1">array</span>()</code></td>
+		<td class="description"><div>
+			<a href="#$exts" class="anchor">#</a>
+
+			<div class="description short">
+				
+<p>Holds the extensions</p>
+
+			</div>
+
+			<div class="description detailed hidden">
+				
+<p>Holds the extensions</p>
+
+
+			</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+</div>
+
+	<div id="footer">
+		 API documentation generated by <a href="http://apigen.org">ApiGen 2.8.0</a>
+	</div>
+</div>
+</div>
+</body>
+</html>
