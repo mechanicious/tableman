@@ -70,7 +70,7 @@ class Tableman extends TablemanCollection
    * @param  closure $callback
    * @callback function($previous, $current) {// -1, 0, 1}
    * @usage http://php.net/manual/en/function.uasort.php#refsect1-function.uasort-parameters
-   * @return mechanicious\Tableman\Tableman;
+   * @return mechanicious\Tableman\Tableman
    */
   public function sortColumns(\closure $callback)
   {
@@ -81,7 +81,7 @@ class Tableman extends TablemanCollection
   /**
    * Reverse the order of columns
    *  
-   * @return mechanicious\Tableman\Tableman;
+   * @return mechanicious\Tableman\Tableman
    */
   public function reverse()
   {
@@ -92,7 +92,7 @@ class Tableman extends TablemanCollection
   /**
    * Reverse the order of columns, alias of Tableman::reverse
    *  
-   * @return mechanicious\Tableman\Tableman;
+   * @return mechanicious\Tableman\Tableman
    */
   public function reverseColumns()
   {
@@ -220,7 +220,7 @@ class Tableman extends TablemanCollection
    * Prepend column
    * 
    * @param  Column $col
-   * @return mechanicious\Tableman\Tableman;
+   * @return mechanicious\Tableman\Tableman
    */
   public function prependColumn(Column $col)
   {
@@ -235,7 +235,7 @@ class Tableman extends TablemanCollection
    * Append column
    * 
    * @param  Column $col
-   * @return mechanicious\Tableman\Tableman;
+   * @return mechanicious\Tableman\Tableman
    */
   public function appendColumn(Column $col)
   {
@@ -296,7 +296,7 @@ class Tableman extends TablemanCollection
    * 
    * @param  Column $col
    * @param  string $header
-   * @return mechanicious\Tableman\Tableman;
+   * @return mechanicious\Tableman\Tableman
    */
   public function replaceColumn(Column $col, $header)
   {
