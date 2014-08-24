@@ -12,8 +12,10 @@ use Illuminate\Support\Collection;
 * Provides a convenient API for manipulation and 
 * creation of tables.
 */
-class Tableman extends Collection
+class Tableman extends TablemanCollection
 {
+  use \mechanicious\Support\ArrayableTrait;
+
   /**
    * Holds the extensions
    * @var array
@@ -449,7 +451,7 @@ class Tableman extends Collection
   {
     $autloadedClasses = get_declared_classes();
 
-    // Don't bother, it seems we did what's needed before already before.
+    // Don't bother, it seems we did what's needed already before.
     if(in_array($name, array_keys($this->exts))) return $this->exts[$name]->make($this, new Config($args[0]));
 
     /**

@@ -1,9 +1,9 @@
-<?php namespace mechanicious\Test;
+<?php namespace mechanicious\Test\Tableman;
 use mechanicious\Columnizer\Column;
 
-require_once __dir__ . '/../../../vendor/autoload.php';
+require_once __dir__ . '/../../../../vendor/autoload.php';
 
-class Tests extends \PHPUnit_Framework_TestCase
+class Tableman extends \PHPUnit_Framework_TestCase
 {
   /**
    *  Data to play with
