@@ -169,7 +169,7 @@
 </span></span><span id="70" class="l"><a class="l" href="#70"> 70: </a><span class="php-comment">   * @param  closure $callback
 </span></span><span id="71" class="l"><a class="l" href="#71"> 71: </a><span class="php-comment">   * @callback function($previous, $current) {// -1, 0, 1}
 </span></span><span id="72" class="l"><a class="l" href="#72"> 72: </a><span class="php-comment">   * @usage http://php.net/manual/en/function.uasort.php#refsect1-function.uasort-parameters
-</span></span><span id="73" class="l"><a class="l" href="#73"> 73: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman;
+</span></span><span id="73" class="l"><a class="l" href="#73"> 73: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
 </span></span><span id="74" class="l"><a class="l" href="#74"> 74: </a><span class="php-comment">   */</span>
 </span><span id="75" class="l"><a class="l" href="#75"> 75: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_sortColumns" href="#_sortColumns">sortColumns</a>(\closure <span class="php-var">$callback</span>)
 </span><span id="76" class="l"><a class="l" href="#76"> 76: </a>  {
@@ -180,7 +180,7 @@
 </span><span id="81" class="l"><a class="l" href="#81"> 81: </a>  <span class="php-comment">/**
 </span></span><span id="82" class="l"><a class="l" href="#82"> 82: </a><span class="php-comment">   * Reverse the order of columns
 </span></span><span id="83" class="l"><a class="l" href="#83"> 83: </a><span class="php-comment">   *  
-</span></span><span id="84" class="l"><a class="l" href="#84"> 84: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman;
+</span></span><span id="84" class="l"><a class="l" href="#84"> 84: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
 </span></span><span id="85" class="l"><a class="l" href="#85"> 85: </a><span class="php-comment">   */</span>
 </span><span id="86" class="l"><a class="l" href="#86"> 86: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_reverse" href="#_reverse">reverse</a>()
 </span><span id="87" class="l"><a class="l" href="#87"> 87: </a>  {
@@ -191,7 +191,7 @@
 </span><span id="92" class="l"><a class="l" href="#92"> 92: </a>  <span class="php-comment">/**
 </span></span><span id="93" class="l"><a class="l" href="#93"> 93: </a><span class="php-comment">   * Reverse the order of columns, alias of Tableman::reverse
 </span></span><span id="94" class="l"><a class="l" href="#94"> 94: </a><span class="php-comment">   *  
-</span></span><span id="95" class="l"><a class="l" href="#95"> 95: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman;
+</span></span><span id="95" class="l"><a class="l" href="#95"> 95: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
 </span></span><span id="96" class="l"><a class="l" href="#96"> 96: </a><span class="php-comment">   */</span>
 </span><span id="97" class="l"><a class="l" href="#97"> 97: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_reverseColumns" href="#_reverseColumns">reverseColumns</a>()
 </span><span id="98" class="l"><a class="l" href="#98"> 98: </a>  {
@@ -319,7 +319,7 @@
 </span></span><span id="220" class="l"><a class="l" href="#220">220: </a><span class="php-comment">   * Prepend column
 </span></span><span id="221" class="l"><a class="l" href="#221">221: </a><span class="php-comment">   * 
 </span></span><span id="222" class="l"><a class="l" href="#222">222: </a><span class="php-comment">   * @param  Column $col
-</span></span><span id="223" class="l"><a class="l" href="#223">223: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman;
+</span></span><span id="223" class="l"><a class="l" href="#223">223: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
 </span></span><span id="224" class="l"><a class="l" href="#224">224: </a><span class="php-comment">   */</span>
 </span><span id="225" class="l"><a class="l" href="#225">225: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_prependColumn" href="#_prependColumn">prependColumn</a>(Column <span class="php-var">$col</span>)
 </span><span id="226" class="l"><a class="l" href="#226">226: </a>  {
@@ -334,7 +334,7 @@
 </span></span><span id="235" class="l"><a class="l" href="#235">235: </a><span class="php-comment">   * Append column
 </span></span><span id="236" class="l"><a class="l" href="#236">236: </a><span class="php-comment">   * 
 </span></span><span id="237" class="l"><a class="l" href="#237">237: </a><span class="php-comment">   * @param  Column $col
-</span></span><span id="238" class="l"><a class="l" href="#238">238: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman;
+</span></span><span id="238" class="l"><a class="l" href="#238">238: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
 </span></span><span id="239" class="l"><a class="l" href="#239">239: </a><span class="php-comment">   */</span>
 </span><span id="240" class="l"><a class="l" href="#240">240: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_appendColumn" href="#_appendColumn">appendColumn</a>(Column <span class="php-var">$col</span>)
 </span><span id="241" class="l"><a class="l" href="#241">241: </a>  {
@@ -395,7 +395,7 @@
 </span></span><span id="296" class="l"><a class="l" href="#296">296: </a><span class="php-comment">   * 
 </span></span><span id="297" class="l"><a class="l" href="#297">297: </a><span class="php-comment">   * @param  Column $col
 </span></span><span id="298" class="l"><a class="l" href="#298">298: </a><span class="php-comment">   * @param  string $header
-</span></span><span id="299" class="l"><a class="l" href="#299">299: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman;
+</span></span><span id="299" class="l"><a class="l" href="#299">299: </a><span class="php-comment">   * @return mechanicious\Tableman\Tableman
 </span></span><span id="300" class="l"><a class="l" href="#300">300: </a><span class="php-comment">   */</span>
 </span><span id="301" class="l"><a class="l" href="#301">301: </a>  <span class="php-keyword1">public</span> <span class="php-keyword1">function</span> <a id="_replaceColumn" href="#_replaceColumn">replaceColumn</a>(Column <span class="php-var">$col</span>, <span class="php-var">$header</span>)
 </span><span id="302" class="l"><a class="l" href="#302">302: </a>  {
